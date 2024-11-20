@@ -1,6 +1,7 @@
 import React from 'react';
 import SearchBar from '../common/SearchBar';
 import Navbar from '../common/NavBar';
+import User from '../../assets/user.svg';
 
 const categories = [
     "Web Development",
@@ -17,9 +18,9 @@ const categories = [
 ]
 
 const featuredUsers = [
-    { name: 'John Doe', expertise: 'Web Dev', avatar: '/assets/user.svg' },
-    { name: 'Jane Smith', expertise: 'Data Science', avatar: '/assets/user.svg' },
-    { name: 'Mike Johnson', expertise: 'Design', avatar: '/assets/user.svg' }   
+    { name: 'John Doe', expertise: 'Web Dev', avatar: User },
+    { name: 'Jane Smith', expertise: 'Data Science', avatar: User },
+    { name: 'Mike Johnson', expertise: 'Design', avatar: User },   
 ]
 
 interface GlobalLayoutProps {

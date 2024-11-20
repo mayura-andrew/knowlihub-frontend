@@ -1,6 +1,7 @@
 import React from 'react';
 import ResourceCard from '../common/ResourceCard.component';
 import { Resource } from '@/types/types';
+import User from '../../assets/web-developer.svg';
 
 
 
@@ -13,7 +14,7 @@ const ResourceList: React.FC = () => {
       author: { 
         id: '1',
         name: 'John Doe', 
-        avatar: 'src/assets/web-developer.svg',
+        avatar: User,
         level: 1,
         position: 'Frontend Developer'
       },
@@ -31,7 +32,7 @@ const ResourceList: React.FC = () => {
       author: { 
         id: '2',
         name: 'Jane Smith', 
-        avatar: 'src/assets/web-developer.svg',
+        avatar: User,
         level: 7,
         position: 'Data Scientist'
       },
@@ -49,7 +50,7 @@ const ResourceList: React.FC = () => {
       author: {
         id: '3',
         name: 'Alice Johnson',
-        avatar: 'src/assets/web-developer.svg',
+        avatar: User,
         level: 3,
         position: 'Full Stack Developer'
       },
