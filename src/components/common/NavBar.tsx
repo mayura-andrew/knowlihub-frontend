@@ -47,7 +47,7 @@ const Navbar: React.FC<NavbarProps> = ({
               to="/create" 
               className="text-gray-600 hover:bg-gray-100 px-3 py-2 rounded-md flex items-center"
             >
-              <span className="mr-2">➕</span> Create
+              <span className="mr-2">➕</span> Share New Resource
             </Link>
           </div>
 

@@ -1,4 +1,3 @@
-import { Search } from 'lucide-react';
 import React, { useState } from 'react';
 
 interface SearchBarProps {
@@ -48,10 +47,12 @@ const SearchBar: React.FC<SearchBarProps> = ({
                     ${sizeClasses[size]}
                   `}
                   />
-            <Search 
+            <span 
                 className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" 
-                size={20} 
-            />
+                style={{ fontSize: '20px' }}
+            >
+                🔍
+            </span>
         </div>
     )
 }

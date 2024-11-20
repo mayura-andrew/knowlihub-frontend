@@ -13,26 +13,13 @@ const categories = [
     "Cloud Computing",
     "DevOps",
     "Blockchain",
-    "Quantum Computing",
-    "Augmented Reality",
-    "Virtual Reality",
-    "Internet of Things",
-    "Robotics",
-    "Automation",
-    "Digital Marketing",
-    "UI/UX Design",
-    "Product Management",
-    "Project Management",
-    "Business Analysis",
-    "Sales",
-    "Human Resources",
-    "Finance"
+    "Quantum Computing"
 ]
 
 const featuredUsers = [
-    { name: 'John Doe', expertise: 'Web Dev', avatar: './assets/web-developer.svg' },
-    { name: 'Jane Smith', expertise: 'Data Science', avatar: './assets/web-developer.svg' },
-    { name: 'Mike Johnson', expertise: 'Design', avatar: './assets/web-developer.svg' }   
+    { name: 'John Doe', expertise: 'Web Dev', avatar: '/api/placeholder/50/50' },
+    { name: 'Jane Smith', expertise: 'Data Science', avatar: '/api/placeholder/50/50' },
+    { name: 'Mike Johnson', expertise: 'Design', avatar: '/api/placeholder/50/50' }   
 ]
 
 interface GlobalLayoutProps {
@@ -50,14 +37,20 @@ const GlobalLayout: React.FC<GlobalLayoutProps> = ({ children, hideLeftSidebar =
         <div className="bg-white min-h-screen flex flex-col">
             <Navbar />
             
-            <div className="flex flex-1">
+            <div className="flex flex-1 mt-6">
                 {/** Left Sidebar */}
                 {!hideLeftSidebar && (
                     <aside className='w-64 bg-gray-50 p-4 border-r overflow-y-auto'>
                         <h3 className='text-lg font-bold mb-4 text-gray-800 flex items-center'>
-                            <span className='mr-2'>🔍</span> Categories
+                            <span className='mr-2'>🗂️</span> Categories
                         </h3>
                         <ul className='space-y-2'>
+                            <li className="text-gray-600 hover:bg-blue-50 p-2 rounded cursor-pointer flex items-center">
+                                <span className='mr-2'>⭐</span> Top Recommendations
+                            </li>
+                            <li className="text-gray-600 hover:bg-blue-50 p-2 rounded cursor-pointer flex items-center">
+                                <span className='mr-2'>🆕</span> Latest
+                            </li>
                             {categories.map((category, index) => (
                                 <li key={index} className="text-gray-600 hover:bg-blue-50 p-2 rounded cursor-pointer flex items-center">
                                     <span className='mr-2'>📚</span>

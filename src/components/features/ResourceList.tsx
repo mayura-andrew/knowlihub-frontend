@@ -24,7 +24,7 @@ const ResourceList: React.FC = () => {
       description: 'Comprehensive React course from basics to advanced concepts',
       author: { 
         name: 'John Doe', 
-        avatar: '/api/placeholder/40/40' 
+        avatar: 'src/assets/web-developer.svg' 
       },
       likes: 245,
       comments: 34,
@@ -38,7 +38,7 @@ const ResourceList: React.FC = () => {
       description: 'In-depth guide to machine learning algorithms and implementation',
       author: { 
         name: 'Jane Smith', 
-        avatar: '/api/placeholder/40/40' 
+        avatar: 'src/assets/web-developer.svg' 
       },
       likes: 189,
       comments: 22,
@@ -52,7 +52,7 @@ const ResourceList: React.FC = () => {
         description: 'In-depth guide to machine learning algorithms and implementation',
         author: { 
           name: 'Jane Smith', 
-          avatar: '/api/placeholder/40/40' 
+          avatar: 'src/assets/web-developer.svg' 
         },
         likes: 189,
         comments: 22,
