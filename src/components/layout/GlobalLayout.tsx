@@ -17,9 +17,9 @@ const categories = [
 ]
 
 const featuredUsers = [
-    { name: 'John Doe', expertise: 'Web Dev', avatar: '/api/placeholder/50/50' },
-    { name: 'Jane Smith', expertise: 'Data Science', avatar: '/api/placeholder/50/50' },
-    { name: 'Mike Johnson', expertise: 'Design', avatar: '/api/placeholder/50/50' }   
+    { name: 'John Doe', expertise: 'Web Dev', avatar: '/assets/user.svg' },
+    { name: 'Jane Smith', expertise: 'Data Science', avatar: '/assets/user.svg' },
+    { name: 'Mike Johnson', expertise: 'Design', avatar: '/assets/user.svg' }   
 ]
 
 interface GlobalLayoutProps {
