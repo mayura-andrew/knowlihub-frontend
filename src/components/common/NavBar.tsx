@@ -14,6 +14,13 @@ const Navbar: React.FC<NavbarProps> = ({
   onLogout 
 }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState<string>('');
+
+  const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    // Implement search functionality here
+    console.log('Searching for:', searchQuery);
+  };
 
   return (
     <nav className="bg-white border-b border-gray-200 fixed top-0 left-0 right-0 z-50">
@@ -29,30 +36,24 @@ const Navbar: React.FC<NavbarProps> = ({
             </Link>
           </div>
 
-          {/* Navigation Links */}
-          <div className="flex space-x-4">
-            <Link 
-              to="/" 
-              className="text-gray-600 hover:bg-gray-100 px-3 py-2 rounded-md flex items-center"
-            >
-              <span className="mr-2">🏠</span> Home
-            </Link>
-            <Link 
-              to="/explore" 
-              className="text-gray-600 hover:bg-gray-100 px-3 py-2 rounded-md flex items-center"
-            >
-              <span className="mr-2">🔍</span> Explore
-            </Link>
-            <Link 
-              to="/create" 
-              className="text-gray-600 hover:bg-gray-100 px-3 py-2 rounded-md flex items-center"
-            >
-              <span className="mr-2">➕</span> Share New Resource
-            </Link>
+          {/* Centered Navigation Links */}
+          <div className="flex items-center space-x-4">
+            <form onSubmit={handleSearch} className="relative">
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Explore..."
+                className="w-full px-8 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300"
+              />
+              <button type="submit" className="absolute right-0 top-0 mt-2 mr-2">
+                🔍
+              </button>
+            </form>
           </div>
 
           {/* User Profile Section */}
-          <div className="flex items-center">
+          <div className="flex items-center space-x-4">
             {user ? (
               <div className="relative">
                 <button 

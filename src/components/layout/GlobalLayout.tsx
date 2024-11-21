@@ -1,5 +1,4 @@
 import React from 'react';
-import SearchBar from '../common/SearchBar';
 import Navbar from '../common/NavBar';
 import User from '../../assets/user.svg';
 
@@ -30,9 +29,6 @@ interface GlobalLayoutProps {
 }
 
 const GlobalLayout: React.FC<GlobalLayoutProps> = ({ children, hideLeftSidebar = false, hideRightSidebar = false }) => {
-    const handleSearch = (query: string) => {
-        console.log('Searching for:', query);
-    }
 
     return (
         <div className="bg-white min-h-screen flex flex-col">
@@ -66,11 +62,6 @@ const GlobalLayout: React.FC<GlobalLayoutProps> = ({ children, hideLeftSidebar =
                 <main className={`flex-1 flex flex-col bg-white p-6 ${hideLeftSidebar && !hideRightSidebar ? 'ml-0' : ''} 
                     ${!hideLeftSidebar && hideRightSidebar ? 'mr-0' : ''}
                 `}>
-                    {/* Search Bar */}
-                    <div className='mb-6'>
-                        <SearchBar placeholder='Search learning resources...' onSearch={handleSearch} size='medium' />
-                    </div>
-
                     {/* Main Content */}
                     <div className="flex-1">
                         {children}
