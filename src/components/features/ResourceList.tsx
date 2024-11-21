@@ -3,8 +3,6 @@ import ResourceCard from '../common/ResourceCard.component';
 import { Resource } from '@/types/types';
 import User from '../../assets/web-developer.svg';
 
-
-
 const ResourceList: React.FC = () => {
   const [resources] = React.useState<Resource[]>([
     {
@@ -19,16 +17,48 @@ const ResourceList: React.FC = () => {
         position: 'Frontend Developer'
       },
       likes: 245,
-      comments: 34,
+      comments: [
+        {
+          id: '1',
+          author: {
+            id: '2',
+            name: 'Jane Smith',
+            avatar: User,
+          },
+          text: 'Great course! Learned a lot.',
+          date: '2023-10-01',
+        },
+        {
+          id: '2',
+          author: {
+            id: '3',
+            name: 'Alice Johnson',
+            avatar: User,
+          },
+          text: 'Highly recommend this course.',
+          date: '2023-10-02',
+        },
+        {
+          id: '3',
+          author: {
+            id: '4',
+            name: 'Mike Johnson',
+            avatar: User,
+          },
+          text: 'Excellent course for beginners.',
+          date: '2023-10-03',
+        }
+      ],
       rating: 4.7,
       tags: ['React', 'JavaScript', 'Web Development'],
       category: 'Web Development',
-      saves: 12
+      saves: 12,
+      url: 'https://cohere.com/llmu'
     },
     {
       id: '2',
       title: 'Machine Learning with Python',
-      description: 'In-depth guide to machine learning algorithms and implementation',
+      description: 'Learn essential algorithms and data structures with a focus on Java implementations, applications, and performance analysis. Part I covers basic data structures, sorting, and searching. Part II explores graph and string algorithms. Offered by Princeton on Coursera.',
       author: { 
         id: '2',
         name: 'Jane Smith', 
@@ -37,11 +67,23 @@ const ResourceList: React.FC = () => {
         position: 'Data Scientist'
       },
       likes: 189,
-      comments: 22,
+      comments: [
+        {
+          id: '1',
+          author: {
+            id: '1',
+            name: 'John Doe',
+            avatar: User,
+          },
+          text: 'Very informative and well-structured.',
+          date: '2023-10-03',
+        },
+      ],
       rating: 4.5,
-      tags: ['Python', 'Machine Learning', 'Data Science'],
+      tags: ['Python', 'Machine Learning', 'Data Science', 'AI', 'ML'],
       category: 'Data Science',
-      saves: 8
+      saves: 8,
+      url: 'https://www.coursera.org/learn/algorithms-part1'
     },
     {
       id: '3',
@@ -55,13 +97,32 @@ const ResourceList: React.FC = () => {
         position: 'Full Stack Developer'
       },
       likes: 145,
-      comments: 18,
+      comments: [],
       rating: 4.3,
       tags: ['Node.js', 'JavaScript', 'Web Development'],
       category: 'Web Development',
-      saves: 6
+      saves: 6,
+      url: 'https://youtube.com/playlist?list=PLqYmG7hTraZCDxZ44o4p3N5Anz3lLRVZF&si=xCmgak5jd6yTogkq'
+    },
+    {
+      id: '4',
+      title: 'Complete Python Bootcamp',
+      description: 'Learn Python from scratch with hands-on projects',
+      author: {
+        id: '4',
+        name: 'Mike Johnson',
+        avatar: User,
+        level: 2,
+        position: 'Software Engineer'
+      },
+      likes: 98,
+      comments: [],
+      rating: 4.2,
+      tags: ['Python', 'Programming', 'Web Development'],
+      category: 'Web Development',
+      saves: 4,
+      url: 'https://youtube.com/playlist?list=PL1PqvM2UQiMoGNTaxFMSK2cih633lpFKP&si=WDqB-oVNJC4qmXdI'
     }
-    // More resources...
   ]);
 
   return (

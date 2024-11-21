@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 // Comprehensive Level System
@@ -55,16 +55,18 @@ const AuthorInfo: React.FC<AuthorInfoProps> = ({
   profileLink,
 }) => {
   const levelInfo = getUserLevelInfo(level);
+  const [isFollowing, setIsFollowing] = useState(false);
 
   const handleFollow = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
+    setIsFollowing(true);
     // TODO: Implement follow functionality
     console.log(`Following ${name}`);
   };
 
-
   return (
-    <Link to={profileLink} className="flex items-center mb-3 no-underline hover:bg-gray-100 p-2 rounded-lg transition-colors duration-200 bg-gray-50">
+    <div className="flex items-center mb-3 no-underline hover:bg-gray-100 p-2 rounded-lg transition-colors duration-200 bg-gray-50">
+      <Link to={profileLink} className="font-semibold text-gray-800 hover:underline">
       <div className="relative">
         <img
           src={avatar}
@@ -72,25 +74,26 @@ const AuthorInfo: React.FC<AuthorInfoProps> = ({
           className="w-10 h-10 rounded-full mr-3"
         />
       </div>
+      </Link>
       <div>
-        <span className="font-semibold text-gray-800 hover:underline">
+        <Link to={profileLink} className="font-semibold text-gray-800 hover:underline">
           {name}
-        </span>
+        </Link>
         <p className="text-sm text-gray-500">{position}</p>
       </div>
       <div 
-          className={`ml-3 px-2 py-0.5 text-xs rounded-full ${levelInfo.color} shadow-md`}
-          title={`Level ${level}`}
-        >
-          {levelInfo.emoji} {levelInfo.title}
+        className={`ml-3 px-2 py-1 text-xs rounded-full ${levelInfo.color} shadow-md`}
+        title={`Level ${level}`}
+      >
+        {levelInfo.emoji} {levelInfo.title}
       </div>
       <button
         onClick={handleFollow}
         className="ml-2 px-2 py-1 text-xs font-medium text-white bg-blue-500 rounded-full hover:bg-blue-600 transition-colors duration-200"
       >
-        Follow
+        {isFollowing ? 'Following' : 'Follow'}
       </button>
-    </Link>
+    </div>
   );
 };
 
