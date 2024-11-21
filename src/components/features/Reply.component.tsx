@@ -1,16 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { CommentProps } from '@/types/types';
 
 const Reply: React.FC<CommentProps> = ({ author, text, avatar, date, replies }) => {
-  const [votes, setVotes] = useState<number>(0);
-
-  const handleUpvote = () => {
-    setVotes(votes + 1);
-  };
-
-  const handleDownvote = () => {
-    setVotes(votes - 1);
-  };
 
   return (
     <div className="relative flex items-start space-x-3 mb-4 p-4 border rounded-lg shadow-sm ml-8">
