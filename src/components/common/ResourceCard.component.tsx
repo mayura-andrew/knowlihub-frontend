@@ -36,21 +36,25 @@ const ResourceCard: React.FC<{ resource: Resource }> = ({ resource }) => {
     <div className="bg-white rounded-xl shadow-xm hover:shadow-md transition-all duration-300 overflow-hidden border-2 border-gray-100">
       <div className="flex flex-col md:flex-row">
         {/* Image and Resource Details Section */}
-        <Link to={`${resource.url}`} className="md:w-1/3 relative h-64">
-          {imageUrl && (
-            <div className="relative h-full">
-              <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent z-10" />
+        <Link to={`${resource.url}`} className="md:w-1/3 relative h-76">
+          <div className="relative h-full">
+            <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent z-10" />
+            {imageUrl ? (
               <img
                 src={imageUrl}
                 alt={resource.title}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover object-center"
               />
-              <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white font-bold p-2 flex items-center justify-between hover:underline">
-                {getPlatformIcon(resource.url)}
-                <span className="ml-2">Visit Resource →</span>
+            ) : (
+              <div className="w-full h-full flex items-center justify-center bg-gray-200">
+                <FaGlobe className="text-gray-500 text-6xl" />
               </div>
+            )}
+            <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white font-bold p-2 flex items-center justify-center hover:underline">
+              {getPlatformIcon(resource.url)}
+              <span className="ml-2">Visit Resource →</span>
             </div>
-          )}
+          </div>
         </Link>
         <div className="flex-1 p-4">
           {/* Author Info */}
@@ -65,10 +69,18 @@ const ResourceCard: React.FC<{ resource: Resource }> = ({ resource }) => {
           </div>
 
           <div className="space-y-3">
-            {/* Title and Description */}
+            {/* Title */}
             <div>
               <h3 className="text-md font-bold text-gray-900 mb-1">{resource.title}</h3>
+            </div>
+
+            {/* Description */}
+            <div className="h-12 overflow-hidden">
               <p className="text-sm text-gray-600 line-clamp-2">{resource.description}</p>
+            </div>
+
+            {/* Shared Date */}
+            <div>
               <p className="text-xs text-gray-500 text-right italic">Shared on {new Date(resource.date).toLocaleDateString()}</p>
             </div>
 
