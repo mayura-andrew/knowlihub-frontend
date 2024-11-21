@@ -66,7 +66,7 @@ const AuthorInfo: React.FC<AuthorInfoProps> = ({
 
   return (
     <div className="flex items-center mb-3 no-underline hover:bg-gray-100 p-2 rounded-lg transition-colors duration-200 bg-gray-50">
-      <Link to={profileLink} className="font-semibold text-gray-800 hover:underline">
+      <Link to={profileLink} className="font-semibold text-gray-800 hover:underline cursor-pointer">
       <div className="relative">
         <img
           src={avatar}
@@ -76,7 +76,7 @@ const AuthorInfo: React.FC<AuthorInfoProps> = ({
       </div>
       </Link>
       <div>
-        <Link to={profileLink} className="font-semibold text-gray-800 hover:underline">
+        <Link to={profileLink} className="font-semibold text-gray-800 hover:underline cursor-pointer">
           {name}
         </Link>
         <p className="text-sm text-gray-500">{position}</p>

@@ -58,7 +58,7 @@ const ResourceCard: React.FC<{ resource: Resource }> = ({ resource }) => {
             <div>
               <h3 className="text-xl font-bold text-gray-900 mb-2">{resource.title}</h3>
               <p className="text-gray-600 line-clamp-2">{resource.description}</p>
-              <p className="text-sm text-gray-500">Shared on {new Date(resource.date).toLocaleDateString()}</p>
+              <p className="text-xs text-gray-500">Shared on {new Date(resource.date).toLocaleDateString()}</p>
             </div>
 
             <Link to={`/resource/${resource.id}`} className="block text-blue-500 font-medium hover:underline mt-4">
@@ -67,7 +67,7 @@ const ResourceCard: React.FC<{ resource: Resource }> = ({ resource }) => {
                 href={resource.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center text-blue-500 hover:text-blue-600 font-medium"
+                className="inline-flex items-center text-blue-500 hover:text-blue-600 font-medium cursor-pointer"
               >
                 Visit Resource →
               </a>
