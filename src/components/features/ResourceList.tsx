@@ -9,6 +9,7 @@ const ResourceList: React.FC = () => {
       id: '1',
       title: 'Complete React Developer Course',
       description: 'Comprehensive React course from basics to advanced concepts',
+      date: '2023-10-01',
       author: { 
         id: '1',
         name: 'John Doe', 
@@ -59,6 +60,7 @@ const ResourceList: React.FC = () => {
       id: '2',
       title: 'Machine Learning with Python',
       description: 'Learn essential algorithms and data structures with a focus on Java implementations, applications, and performance analysis. Part I covers basic data structures, sorting, and searching. Part II explores graph and string algorithms. Offered by Princeton on Coursera.',
+      date: '2023-10-02',
       author: { 
         id: '2',
         name: 'Jane Smith', 
@@ -89,6 +91,7 @@ const ResourceList: React.FC = () => {
       id: '3',
       title: 'Complete Node.js Developer Course',
       description: 'Learn to build scalable web applications using Node.js',
+      date: '2023-10-03',
       author: {
         id: '3',
         name: 'Alice Johnson',
@@ -108,6 +111,7 @@ const ResourceList: React.FC = () => {
       id: '4',
       title: 'Complete Python Bootcamp',
       description: 'Learn Python from scratch with hands-on projects',
+      date: '2023-10-04',
       author: {
         id: '4',
         name: 'Mike Johnson',

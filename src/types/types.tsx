@@ -22,6 +22,7 @@ export interface Resource {
   id: string;
   title: string;
   description: string;
+  date: string;
   url: string;
   imageUrl?: string;
   author: {

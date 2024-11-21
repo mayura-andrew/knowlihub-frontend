@@ -51,7 +51,7 @@ const Comment: React.FC<CommentProps> = ({ author, text, avatar, date, replies }
               className="w-full p-2 border rounded-lg"
               placeholder="Write a reply..."
             />
-            <button onClick={handleReply} className="mt-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
+             <button onClick={handleReply} className="mt-2 px-2 py-1 bg-blue-500 text-white rounded-lg hover:bg-blue-600 text-sm">
               Post Reply
             </button>
           </div>

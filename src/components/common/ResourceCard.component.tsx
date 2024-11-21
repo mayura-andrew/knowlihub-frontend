@@ -25,7 +25,7 @@ const ResourceCard: React.FC<{ resource: Resource }> = ({ resource }) => {
   }, [resource.url, resource.imageUrl]);
 
   return (
-    <div className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden">
+    <div className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border-blue-500 border-t-4">
       <div className="flex flex-col md:flex-row">
         {/* Image and Resource Details Section */}
         <div className="md:w-1/3 relative h-64">
@@ -58,6 +58,7 @@ const ResourceCard: React.FC<{ resource: Resource }> = ({ resource }) => {
             <div>
               <h3 className="text-xl font-bold text-gray-900 mb-2">{resource.title}</h3>
               <p className="text-gray-600 line-clamp-2">{resource.description}</p>
+              <p className="text-xs text-gray-500">Shared on {new Date(resource.date).toLocaleDateString()}</p>
             </div>
 
             <Link to={`/resource/${resource.id}`} className="block text-blue-500 font-medium hover:underline mt-4">
@@ -139,7 +140,7 @@ const ResourceCard: React.FC<{ resource: Resource }> = ({ resource }) => {
               ))
             ) : (
               <div className="text-center text-gray-500">
-                No comments yet. Be the first to share your thoughts! 🤔
+                No comments yet. Be the first to share your thoughts! 🤔💬
               </div>
             )}
           </div>
