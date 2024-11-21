@@ -135,7 +135,7 @@ const ResourceList: React.FC = () => {
 
   return (
     <div className="flex justify-center">
-      <div className="w-full max-w-4xl p-6">
+      <div className="w-full max-w-4xl p-6 overflow-y-auto h-screen custom-scrollbar">
         <div className="grid grid-cols-1 gap-6">
           {resources.map((resource) => (
             <ResourceCard key={resource.id} resource={resource} />
