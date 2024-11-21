@@ -55,6 +55,11 @@ const Navbar: React.FC<NavbarProps> = ({
 
           {/* User Profile Section */}
           <div className="flex items-center space-x-4">
+            <Link to="/create">
+              <Button className="bg-gradient-to-r from-green-400 to-blue-500 text-white px-4 py-2 rounded-full hover:from-green-500 hover:to-blue-600 transition-all duration-300">
+                Add New Resource
+              </Button>
+            </Link>
             {user ? (
               <div className="relative">
                 <button 
@@ -95,12 +100,12 @@ const Navbar: React.FC<NavbarProps> = ({
             ) : (
               <div className="flex space-x-2">
                 <Link to="/login">
-                  <Button className="rounded-full bg-blue-300 text-blue-800 hover:bg-blue-400">
+                  <Button className="rounded-full bg-blue-500 text-white hover:bg-blue-600">
                     Login
                   </Button>
                 </Link>
                 <Link to="/signup">
-                  <Button className="rounded-full border border-blue-300 text-blue-300 hover:bg-blue-50">
+                  <Button className="rounded-full border border-blue-500 text-blue-500 hover:bg-blue-50">
                     Sign Up
                   </Button>
                 </Link>

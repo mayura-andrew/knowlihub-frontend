@@ -152,7 +152,7 @@ const ResourceCard: React.FC<{ resource: Resource }> = ({ resource }) => {
               ))
             ) : (
               <div className="text-center text-gray-500">
-                No comments yet. Be the first to share your thoughts! 🤔💬
+                No comments yet. Be the first to share your thoughts! 🤔
               </div>
             )}
           </div>
