@@ -3,6 +3,7 @@ export interface CommentProps {
   text: string;
   avatar: string;
   date: string;
+  position: string;
   replies?: CommentProps[];
 }
 
@@ -12,6 +13,7 @@ export interface Comment {
     id: string;
     name: string;
     avatar: string;
+    position: string;
   };
   text: string;
   date: string;

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Button } from '../ui/button';
 
 interface NavbarProps {
   user?: {
@@ -44,7 +45,7 @@ const Navbar: React.FC<NavbarProps> = ({
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Explore..."
-                className="w-full px-8 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300"
+                className="w-72 px-8 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300"
               />
               <button type="submit" className="absolute right-0 top-0 mt-2 mr-2">
                 🔍
@@ -93,17 +94,15 @@ const Navbar: React.FC<NavbarProps> = ({
               </div>
             ) : (
               <div className="flex space-x-2">
-                <Link 
-                  to="/login" 
-                  className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
-                >
-                  Login
+                <Link to="/login">
+                  <Button className="rounded-full bg-blue-300 text-blue-800 hover:bg-blue-400">
+                    Login
+                  </Button>
                 </Link>
-                <Link 
-                  to="/signup" 
-                  className="border border-blue-500 text-blue-500 px-4 py-2 rounded-md hover:bg-blue-50"
-                >
-                  Sign Up
+                <Link to="/signup">
+                  <Button className="rounded-full border border-blue-300 text-blue-300 hover:bg-blue-50">
+                    Sign Up
+                  </Button>
                 </Link>
               </div>
             )}

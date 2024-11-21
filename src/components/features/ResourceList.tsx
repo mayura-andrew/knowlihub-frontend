@@ -25,6 +25,7 @@ const ResourceList: React.FC = () => {
             id: '2',
             name: 'Jane Smith',
             avatar: User,
+            position: 'Data Scientist'
           },
           text: 'Great course! Learned a lot.',
           date: '2023-10-01',
@@ -35,6 +36,7 @@ const ResourceList: React.FC = () => {
             id: '3',
             name: 'Alice Johnson',
             avatar: User,
+            position: 'Full Stack Developer'
           },
           text: 'Highly recommend this course.',
           date: '2023-10-02',
@@ -45,6 +47,7 @@ const ResourceList: React.FC = () => {
             id: '4',
             name: 'Mike Johnson',
             avatar: User,
+            position: 'Software Engineer'
           },
           text: 'Excellent course for beginners.',
           date: '2023-10-03',
@@ -76,6 +79,7 @@ const ResourceList: React.FC = () => {
             id: '1',
             name: 'John Doe',
             avatar: User,
+            position: 'Frontend Developer'
           },
           text: 'Very informative and well-structured.',
           date: '2023-10-03',

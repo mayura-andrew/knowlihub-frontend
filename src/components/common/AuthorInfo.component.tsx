@@ -75,7 +75,7 @@ const AuthorInfo: React.FC<AuthorInfoProps> = ({
         />
       </div>
       </Link>
-      <div>
+      <div className='text-left'>
         <Link to={profileLink} className="font-semibold text-gray-800 hover:underline cursor-pointer">
           {name}
         </Link>
@@ -89,7 +89,9 @@ const AuthorInfo: React.FC<AuthorInfoProps> = ({
       </div>
       <button
         onClick={handleFollow}
-        className="ml-2 px-2 py-1 text-xs font-medium text-white bg-blue-500 rounded-full hover:bg-blue-600 transition-colors duration-200"
+        className={`ml-2 px-2 py-1 text-xs font-medium rounded-full transition-colors duration-200 ${
+          isFollowing ? 'bg-blue-500 text-white hover:bg-blue-600' : 'text-blue-500 border border-blue-500 hover:bg-blue-100'
+        }`}
       >
         {isFollowing ? 'Following' : 'Follow'}
       </button>

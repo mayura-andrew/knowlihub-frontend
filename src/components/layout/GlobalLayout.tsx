@@ -28,11 +28,15 @@ interface GlobalLayoutProps {
     hideRightSidebar?: boolean;
 }
 
+const navUser = {
+    name: 'John Doe',
+    avatar: User
+}
 const GlobalLayout: React.FC<GlobalLayoutProps> = ({ children, hideLeftSidebar = false, hideRightSidebar = false }) => {
 
     return (
         <div className="bg-white min-h-screen flex flex-col">
-            <Navbar />
+            <Navbar user={navUser} />
             
             <div className="flex flex-1 mt-6">
                 {/** Left Sidebar */}
