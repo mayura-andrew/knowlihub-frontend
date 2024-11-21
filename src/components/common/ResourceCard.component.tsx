@@ -25,7 +25,7 @@ const ResourceCard: React.FC<{ resource: Resource }> = ({ resource }) => {
   }, [resource.url, resource.imageUrl]);
 
   return (
-    <div className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border-blue-500 border-t-4">
+    <div className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border-t-4 border-blue-500">
       <div className="flex flex-col md:flex-row">
         {/* Image and Resource Details Section */}
         <div className="md:w-1/3 relative h-64">
@@ -58,7 +58,7 @@ const ResourceCard: React.FC<{ resource: Resource }> = ({ resource }) => {
             <div>
               <h3 className="text-xl font-bold text-gray-900 mb-2">{resource.title}</h3>
               <p className="text-gray-600 line-clamp-2">{resource.description}</p>
-              <p className="text-xs text-gray-500">Shared on {new Date(resource.date).toLocaleDateString()}</p>
+              <p className="text-sm text-gray-500">Shared on {new Date(resource.date).toLocaleDateString()}</p>
             </div>
 
             <Link to={`/resource/${resource.id}`} className="block text-blue-500 font-medium hover:underline mt-4">
@@ -124,28 +124,26 @@ const ResourceCard: React.FC<{ resource: Resource }> = ({ resource }) => {
       </div>
 
       {/* Comments Section */}
-      {showComments && (
-        <div className="p-6 border-t border-gray-100">
-          <h4 className="text-lg font-bold text-gray-900 mb-4">Community Insights 💡</h4>
-          <div className="max-h-48 overflow-y-auto">
-            {resource.comments.length > 0 ? (
-              resource.comments.map((comment) => (
-                <Comment
-                  key={comment.id}
-                  author={comment.author.name}
-                  text={comment.text}
-                  avatar={comment.author.avatar}
-                  date={comment.date}
-                />
-              ))
-            ) : (
-              <div className="text-center text-gray-500">
-                No comments yet. Be the first to share your thoughts! 🤔💬
-              </div>
-            )}
-          </div>
+      <div className={`p-6 border-t border-gray-100 transition-all duration-300 ${showComments ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0 overflow-hidden'}`}>
+        <h4 className="text-lg font-bold text-gray-900 mb-4">Community Insights 💡</h4>
+        <div className="max-h-48 overflow-y-auto">
+          {resource.comments.length > 0 ? (
+            resource.comments.map((comment) => (
+              <Comment
+                key={comment.id}
+                author={comment.author.name}
+                text={comment.text}
+                avatar={comment.author.avatar}
+                date={comment.date}
+              />
+            ))
+          ) : (
+            <div className="text-center text-gray-500">
+              No comments yet. Be the first to share your thoughts! 🤔💬
+            </div>
+          )}
         </div>
-      )}
+      </div>
     </div>
   );
 };

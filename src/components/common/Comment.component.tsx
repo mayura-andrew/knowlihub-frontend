@@ -19,9 +19,9 @@ const Comment: React.FC<CommentProps> = ({ author, text, avatar, date, replies }
   const handleReply = () => {
     if (replyText.trim()) {
       const newReply: CommentProps = {
-        author: 'Current User', // Replace with actual current user data
+        author: author, // Replace with actual current user data
         text: replyText,
-        avatar: 'path/to/avatar', // Replace with actual current user avatar
+        avatar: avatar, // Replace with actual current user avatar
         date: new Date().toISOString(),
         replies: [],
       };
