@@ -58,7 +58,7 @@ const ResourceDetailPage: React.FC = () => {
 
   return (
     <GlobalLayout hideLeftSidebar hideRightSidebar>
-      <div className="max-w-4xl mx-auto p-6">
+      <div className="max-w-4xl mx-auto">
         {/* Resource Header */}
         <div className="flex justify-between items-start mb-6">
           <div>

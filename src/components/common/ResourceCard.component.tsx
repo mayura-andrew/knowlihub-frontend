@@ -33,12 +33,12 @@ const ResourceCard: React.FC<{ resource: Resource }> = ({ resource }) => {
   };
 
   return (
-    <div className="bg-white rounded-lg border border-[#DEE2E6] hover:shadow-lg transition-all duration-300 overflow-hidden font-['Inter']">
+    <div className="bg-white rounded-lg border border-[#DEE2E6] hover:shadow-lg transition-all duration-300 overflow-hidden font-['Roboto']">
       <div className="flex flex-col md:flex-row">
         {/* Image Section */}
         <Link 
           to={`${resource.url}`} 
-          className="md:w-1/3 relative h-64 md:h-auto overflow-hidden group"
+          className="md:w-1/3 relative h-72 md:h-auto overflow-hidden group"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -79,7 +79,7 @@ const ResourceCard: React.FC<{ resource: Resource }> = ({ resource }) => {
             />
           </div>
 
-          <div className="space-y-4">
+          <div className="space-y-4 text-center">
             {/* Title */}
             <h3 className="text-lg font-semibold text-[#212529] leading-tight">
               {resource.title}
