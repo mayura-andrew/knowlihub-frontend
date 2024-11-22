@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Resource } from '@/types/types';
 import AuthorInfo from './AuthorInfo.component';
 import Comment from './Comment.component';
-import { FaYoutube, FaGlobe } from 'react-icons/fa';
+import { Globe, Youtube, Bookmark, MessageCircle, ExternalLink, Heart } from 'lucide-react';
 
 const ResourceCard: React.FC<{ resource: Resource }> = ({ resource }) => {
   const [imageUrl, setImageUrl] = useState<string | undefined>(resource.imageUrl);
@@ -27,107 +27,132 @@ const ResourceCard: React.FC<{ resource: Resource }> = ({ resource }) => {
 
   const getPlatformIcon = (url: string) => {
     if (url.includes('youtube')) {
-      return <FaYoutube className="text-red-500" />;
+      return <Youtube className="text-[#DC3545]" size={20} />;
     }
-    return <FaGlobe className="text-blue-500" />;
+    return <Globe className="text-[#007BFF]" size={20} />;
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-xm hover:shadow-md transition-all duration-300 overflow-hidden border-2 border-gray-100">
+    <div className="bg-white rounded-lg border border-[#DEE2E6] hover:shadow-lg transition-all duration-300 overflow-hidden font-['Inter']">
       <div className="flex flex-col md:flex-row">
-        {/* Image and Resource Details Section */}
-        <Link to={`${resource.url}`} className="md:w-1/3 relative h-76">
+        {/* Image Section */}
+        <Link 
+          to={`${resource.url}`} 
+          className="md:w-1/3 relative h-64 md:h-auto overflow-hidden group"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <div className="relative h-full">
-            <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent z-10" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent z-10" />
             {imageUrl ? (
               <img
                 src={imageUrl}
                 alt={resource.title}
-                className="w-full h-full object-cover object-center"
+                className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
               />
             ) : (
-              <div className="w-full h-full flex items-center justify-center bg-gray-200">
-                <FaGlobe className="text-gray-500 text-6xl" />
+              <div className="w-full h-full flex items-center justify-center bg-[#F8F9FA]">
+                <Globe className="text-[#6C757D] w-16 h-16" />
               </div>
             )}
-            <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white font-bold p-2 flex items-center justify-center hover:underline">
+            <div className="absolute bottom-0 left-0 right-0 bg-black/60 text-white font-medium py-3 px-4 flex items-center justify-center group-hover:bg-[#007BFF]/90 transition-colors">
               {getPlatformIcon(resource.url)}
-              <span className="ml-2">Visit Resource →</span>
+              <span className="ml-2 flex items-center">
+                Visit Resource
+                <ExternalLink size={16} className="ml-1" />
+              </span>
             </div>
           </div>
         </Link>
-        <div className="flex-1 p-4">
+
+        {/* Content Section */}
+        <div className="flex-1 p-6">
           {/* Author Info */}
-          <div className="mb-3">
+          <div className="mb-4">
             <AuthorInfo
               avatar={resource.author.avatar}
               name={resource.author.name}
               level={resource.author.level}
               position={resource.author.position}
               profileLink={`/profile/${resource.author.id}`}
+              showFollowButton={true}
             />
           </div>
 
-          <div className="space-y-3">
+          <div className="space-y-4">
             {/* Title */}
-            <div>
-              <h3 className="text-md font-bold text-gray-900 mb-1">{resource.title}</h3>
-            </div>
+            <h3 className="text-lg font-semibold text-[#212529] leading-tight">
+              {resource.title}
+            </h3>
 
             {/* Description */}
-            <div className="h-12 overflow-hidden">
-              <p className="text-sm text-gray-600 line-clamp-2">{resource.description}</p>
-            </div>
-
-            {/* Shared Date */}
-            <div>
-              <p className="text-xs text-gray-500 text-right italic">Shared on {new Date(resource.date).toLocaleDateString()}</p>
-            </div>
+            <p className="text-[#495057] text-sm line-clamp-2">
+              {resource.description}
+            </p>
 
             {/* Tags */}
-            <div className="flex flex-wrap gap-1">
+            <div className="flex flex-wrap gap-2">
               {resource.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="px-2 py-1 bg-purple-50 text-purple-600 rounded-full text-xs font-medium hover:bg-blue-100 transition-colors"
+                  className="px-3 py-1 bg-[#007BFF]/10 text-[#007BFF] rounded-full text-xs font-medium 
+                           hover:bg-[#007BFF]/20 transition-colors cursor-pointer"
                 >
-                  {tag}
+                  #{tag}
                 </span>
               ))}
             </div>
 
+            {/* Shared Date */}
+            <p className="text-xs text-[#6C757D] italic">
+              Shared on {new Date(resource.date).toLocaleDateString()}
+            </p>
+
             {/* Stats and Actions */}
-            <div className="flex items-center justify-between pt-2 border-t border-gray-100">
-              <div className="flex items-center space-x-3">
-                <div className="flex items-center text-amber-500">
-                  <span className="text-base mr-1">⭐</span>
-                  <span className="font-medium text-sm">{resource.rating}</span>
+            <div className="flex items-center justify-between pt-4 border-t border-[#DEE2E6]">
+              <div className="flex items-center space-x-4">
+                <div className="flex items-center text-[#FFC107]">
+                  <span className="text-lg mr-1">⭐</span>
+                  <span className="font-medium text-sm text-[#212529]">
+                    {resource.rating}
+                  </span>
                 </div>
-                <div className="flex items-center text-blue-500 cursor-pointer" onClick={() => setShowComments(!showComments)}>
-                  <span className="text-base mr-1">💬</span>
-                  <span className="font-medium text-sm">{resource.comments.length}</span>
-                </div>
+                <button 
+                  onClick={() => setShowComments(!showComments)}
+                  className="flex items-center space-x-1 text-[#495057] hover:text-[#007BFF] transition-colors"
+                >
+                  <MessageCircle size={18} />
+                  <span className="font-medium text-sm">
+                    {resource.comments.length}
+                  </span>
+                </button>
               </div>
 
-              <div className="flex items-center space-x-2">
+              <div className="flex items-center space-x-3">
                 <button
                   onClick={(e) => {
                     e.preventDefault();
                     console.log(`Saving resource ${resource.id}`);
                   }}
-                  className="px-3 py-2 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 transition-colors font-medium text-xs"
+                  className="flex items-center space-x-1 px-4 py-2 text-sm font-medium text-[#007BFF] 
+                           bg-[#007BFF]/10 rounded-full hover:bg-[#007BFF]/20 transition-colors"
                 >
-                  Save 📌
+                  <Bookmark size={16} />
+                  <span>Save</span>
                 </button>
+
                 <button
-                  onClick={(e) => {
+                onClick={(e) => {
                     e.preventDefault();
                     console.log(`Recommending resource ${resource.id}`);
-                  }}
-                  className="px-3 py-2 bg-green-50 text-green-600 rounded-lg hover:bg-green-100 transition-colors font-medium text-xs"
-                >
-                  Recommend 👍
-                </button>
+                }}
+                className="flex items-center space-x-1 px-4 py-2 text-sm font-medium text-white 
+                           bg-[#28A745] rounded-full hover:bg-[#28A745]/90 transition-colors"
+            >
+              <Heart size={16} />
+
+              <span>Recommend</span>
+            </button>
               </div>
             </div>
           </div>
@@ -136,9 +161,14 @@ const ResourceCard: React.FC<{ resource: Resource }> = ({ resource }) => {
 
       {/* Comments Section */}
       {showComments && (
-        <div className="p-4 border-t border-gray-100 transition-all duration-300">
-          <h4 className="text-base font-bold text-gray-900 mb-2">Community Insights 💡</h4>
-          <div className="max-h-48 overflow-y-auto">
+        <div className="p-6 border-t border-[#DEE2E6] bg-[#F8F9FA]">
+<div className="flex justify-between items-center mb-4">
+            <h4 className="text-[#212529] font-semibold flex items-center">
+                Community Insights
+                <span className="ml-2">💡</span>
+            </h4>
+        </div>
+          <div className="max-h-64 overflow-y-auto space-y-4 custom-scrollbar">
             {resource.comments.length > 0 ? (
               resource.comments.map((comment) => (
                 <Comment
@@ -151,8 +181,8 @@ const ResourceCard: React.FC<{ resource: Resource }> = ({ resource }) => {
                 />
               ))
             ) : (
-              <div className="text-center text-gray-500">
-                No comments yet. Be the first to share your thoughts! 🤔
+              <div className="text-center py-8 text-[#6C757D]">
+                No recommend comments yet. Be the first to share your thoughts! 🤔
               </div>
             )}
           </div>

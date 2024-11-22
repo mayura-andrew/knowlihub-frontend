@@ -1,8 +1,17 @@
-import { CommentProps } from '@/types/types';
 import React, { useState } from 'react';
+import { CommentProps } from '@/types/types';
 import Reply from '../features/Reply.component';
+import { MessageSquare, ThumbsUp, ThumbsDown } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
-const Comment: React.FC<CommentProps> = ({ author, text, avatar, date, replies, position }) => {
+const Comment: React.FC<CommentProps> = ({ 
+  author, 
+  text, 
+  avatar, 
+  date, 
+  replies, 
+  position 
+}) => {
   const [votes, setVotes] = useState<number>(0);
   const [showReplyForm, setShowReplyForm] = useState<boolean>(false);
   const [replyText, setReplyText] = useState<string>('');
@@ -19,10 +28,10 @@ const Comment: React.FC<CommentProps> = ({ author, text, avatar, date, replies, 
   const handleReply = () => {
     if (replyText.trim()) {
       const newReply: CommentProps = {
-        author: author, // Replace with actual current user data
+        author: author,
         text: replyText,
         position: position,
-        avatar: avatar, // Replace with actual current user avatar
+        avatar: avatar,
         date: new Date().toISOString(),
         replies: [],
       };
@@ -33,52 +42,109 @@ const Comment: React.FC<CommentProps> = ({ author, text, avatar, date, replies, 
   };
 
   return (
-    <div className="relative flex items-start space-x-4 mb-6 p-4 border rounded-lg shadow-sm bg-white">
-      <img src={avatar} alt={author} className="w-12 h-12 rounded-full" />
-      <div className="flex-1">
-        <div className="flex justify-between items-center">
-          <div className='text-left'>
-            <h4 className="font-semibold text-gray-900">{author}</h4>
-            <p className="text-gray-500 text-sm">{position}</p>
-            <p className="text-gray-500 text-sm">{date}</p>
+    <div className="relative flex gap-4 p-5 border border-[#DEE2E6] rounded-lg bg-white font-['Inter']">
+      {/* Avatar */}
+      <div className="flex-shrink-0">
+        <img 
+          src={avatar} 
+          alt={author} 
+          className="w-10 h-10 rounded-full ring-2 ring-[#007BFF]/10"
+        />
+      </div>
+
+      {/* Content */}
+      <div className="flex-1 min-w-0">
+        {/* Header */}
+        <div className="flex justify-between text-left items-start mb-2">
+          <div>
+            <h4 className="font-semibold text-[#212529]">{author}</h4>
+            <div className="flex items-center gap-2 text-xs text-[#6C757D]">
+              <span className="font-medium">{position}</span>
+              <span>•</span>
+              <time className="text-[#6C757D]">
+                {new Date(date).toLocaleDateString()}
+              </time>
+            </div>
           </div>
-          <div className="flex items-center space-x-2">
-            <button onClick={handleUpvote} className="text-gray-500 hover:text-gray-700">
-              ⬆️
+
+          {/* Voting */}
+          <div className="flex items-center gap-1 bg-[#F8F9FA] rounded-full px-2 py-1">
+            <button 
+              onClick={handleUpvote}
+              className="p-1 text-[#6C757D] hover:text-[#28A745] transition-colors"
+              aria-label="Upvote"
+            >
+              <ThumbsUp size={14} />
             </button>
-            <span className="font-medium text-gray-700">{votes}</span>
-            <button onClick={handleDownvote} className="text-gray-500 hover:text-gray-700">
-              ⬇️
+            <span className="text-sm font-medium text-[#212529] min-w-[20px] text-center">
+              {votes}
+            </span>
+            <button 
+              onClick={handleDownvote}
+              className="p-1 text-[#6C757D] hover:text-[#DC3545] transition-colors"
+              aria-label="Downvote"
+            >
+              <ThumbsDown size={14} />
             </button>
           </div>
         </div>
-        <p className="text-gray-700 mt-2">{text}</p>
-        <div className="flex items-center space-x-2 mt-3">
-          <button onClick={() => setShowReplyForm(!showReplyForm)} className="text-blue-500 hover:underline text-sm">
+
+        {/* Comment Text */}
+        <p className="text-[#495057] text-sm leading-relaxed mb-3">
+          {text}
+        </p>
+
+        {/* Actions */}
+        <div className="flex items-center gap-2">
+          <button 
+            onClick={() => setShowReplyForm(!showReplyForm)}
+            className="flex items-center gap-1 text-xs font-medium text-[#007BFF] hover:text-[#0056b3] transition-colors"
+          >
+            <MessageSquare size={14} />
             Reply
           </button>
         </div>
+
+        {/* Reply Form */}
         {showReplyForm && (
-          <div className="mt-3">
+          <div className="mt-4 space-y-3">
             <textarea
               value={replyText}
               onChange={(e) => setReplyText(e.target.value)}
-              className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="Write a reply..."
+              className="w-full p-3 text-sm border border-[#DEE2E6] rounded-lg placeholder-[#6C757D] 
+                       focus:outline-none focus:ring-2 focus:ring-[#007BFF] focus:border-transparent
+                       transition-all resize-none"
+              placeholder="Share your thoughts..."
+              rows={3}
             />
-            <button onClick={handleReply} className="mt-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 text-sm">
-              Post Reply
-            </button>
+            <div className="flex justify-end gap-2">
+              <Button 
+                onClick={() => setShowReplyForm(false)}
+                className="px-4 py-2 text-xs font-medium text-[#6C757D] bg-white border border-[#DEE2E6] 
+                         hover:bg-[#F8F9FA] rounded-full transition-colors"
+              >
+                Cancel
+              </Button>
+              <Button 
+                onClick={handleReply}
+                className="px-4 py-2 text-xs font-medium text-white bg-[#007BFF] 
+                         hover:bg-[#0056b3] rounded-full transition-colors"
+                disabled={!replyText.trim()}
+              >
+                Post Reply
+              </Button>
+            </div>
           </div>
         )}
+
+        {/* Replies */}
         {commentReplies.length > 0 && (
-          <div className="mt-4 space-y-4">
+          <div className="mt-4 space-y-3 pl-4 border-l-2 border-[#DEE2E6]">
             {commentReplies.map((reply, index) => (
               <Reply key={index} {...reply} />
             ))}
           </div>
         )}
-        
       </div>
     </div>
   );
