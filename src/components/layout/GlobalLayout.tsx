@@ -154,7 +154,7 @@ const GlobalLayout: React.FC<GlobalLayoutProps> = ({ children, hideLeftSidebar =
                         <div className="my-4 border-t border-gray-300"></div>
 
                         {/** Current Activity Status Section */}
-                        <div className="bg-white p-4 rounded-lg shadow-sm">
+                        <div className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300">
                             <h3 className="text-lg font-semibold text-gray-800 flex items-center justify-center mb-4">
                                 <span className="mr-2">📊</span> Current Activity
                             </h3>
