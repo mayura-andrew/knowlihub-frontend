@@ -1,23 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Search, Plus, Link as LinkIcon } from 'lucide-react';
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogFooter,
-} from "@/components/ui/dialog";
-import {
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
+import { Search, Plus } from 'lucide-react';
+import ShareResourceModal from '../features/ShareResourceModal.component';
 
 interface NavbarProps {
   user?: {
@@ -34,22 +19,10 @@ const Navbar: React.FC<NavbarProps> = ({
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [shareModalOpen, setShareModalOpen] = useState(false);
-  const [resourceForm, setResourceForm] = useState({
-    title: '',
-    url: '',
-    description: ''
-  });
 
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log('Searching for:', searchQuery);
-  };
-
-  const handleShareSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log('Sharing resource:', resourceForm);
-    setShareModalOpen(false);
-    setResourceForm({ title: '', url: '', description: '' });
   };
 
   return (
@@ -164,85 +137,7 @@ const Navbar: React.FC<NavbarProps> = ({
       </nav>
 
       {/* Share Resource Modal */}
-      <Dialog open={shareModalOpen} onOpenChange={setShareModalOpen}>
-        <DialogContent className="sm:max-w-[525px]">
-          <DialogHeader>
-            <DialogTitle className="text-2xl font-semibold">Share New Resource</DialogTitle>
-          </DialogHeader>
-          <form onSubmit={handleShareSubmit} className="space-y-6">
-            <FormField
-              name="title"
-              render={() => (
-                <FormItem>
-                  <FormLabel>Title</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder="Enter resource title"
-                      value={resourceForm.title}
-                      onChange={(e) => setResourceForm(prev => ({ ...prev, title: e.target.value }))}
-                      className="w-full"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              name="url"
-              render={() => (
-                <FormItem>
-                  <FormLabel>URL</FormLabel>
-                  <FormControl>
-                    <div className="relative">
-                      <LinkIcon className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
-                      <Input
-                        placeholder="https://"
-                        value={resourceForm.url}
-                        onChange={(e) => setResourceForm(prev => ({ ...prev, url: e.target.value }))}
-                        className="w-full pl-10"
-                      />
-                    </div>
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              name="description"
-              render={() => (
-                <FormItem>
-                  <FormLabel>Description</FormLabel>
-                  <FormControl>
-                    <Textarea
-                      placeholder="Describe the resource..."
-                      value={resourceForm.description}
-                      onChange={(e) => setResourceForm(prev => ({ ...prev, description: e.target.value }))}
-                      className="w-full min-h-[100px]"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <DialogFooter>
-              <Button
-                type="button"
-                variant="outline"
-                onClick={() => setShareModalOpen(false)}
-                className="mr-2"
-              >
-                Cancel
-              </Button>
-              <Button 
-                type="submit"
-                className="bg-[#007BFF] text-white hover:bg-[#0056b3]"
-              >
-                Share Resource
-              </Button>
-            </DialogFooter>
-          </form>
-        </DialogContent>
-      </Dialog>
+      <ShareResourceModal open={shareModalOpen} onOpenChange={() => setShareModalOpen(false)} />
     </>
   );
 };

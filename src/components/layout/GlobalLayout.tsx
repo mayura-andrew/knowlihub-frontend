@@ -5,6 +5,7 @@ import AuthorInfo from '../common/AuthorInfo.component';
 import UserDashboardCards from '../common/UserDashboardCards';
 import { GithubIcon, TwitterIcon, LinkedinIcon } from 'lucide-react';
 import SidebarInfo from '../common/Footer.component';
+import { Link } from 'react-router-dom';
 
 const categories = [
     "Web Development",
@@ -184,6 +185,11 @@ const GlobalLayout: React.FC<GlobalLayoutProps> = ({
                                 ))}
                             </ul>
                         </div>
+                        <div className="mt-4 text-center">
+                        <Link to="/more-info" className="text-sm text-[#007BFF] hover:underline">
+                        See More Contributors
+                        </Link>
+                    </div>
                     </aside>
                 )}
             </div>

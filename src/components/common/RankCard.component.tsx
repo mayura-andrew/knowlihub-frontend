@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 interface RankCardProps {
   navUser: {
@@ -34,6 +35,7 @@ const RankCard: React.FC<RankCardProps> = ({ navUser, levelInfo, nextLevelInfo }
             </span>
           </div>
         </div>
+        
       </div>
 
       {/* Level Info */}
@@ -80,6 +82,11 @@ const RankCard: React.FC<RankCardProps> = ({ navUser, levelInfo, nextLevelInfo }
             </div>
           </div>
         )}
+      </div>
+      <div className="mt-4 text-center">
+        <Link to="/more-info" className="text-sm text-[#007BFF] hover:underline">
+          More Info
+        </Link>
       </div>
     </div>
   );

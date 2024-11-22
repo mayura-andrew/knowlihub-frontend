@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 interface ActivityCardProps {
     activity: {
@@ -27,7 +28,9 @@ const ActivityCard: React.FC<ActivityCardProps> = ({ activity }) => {
       <div className="flex justify-between items-center mb-2">
         <div className="flex items-center space-x-2">
           <span className="text-base">⏱️</span>
+          <Link to="/more-info" className="text-sm hover:underline">
           <h3 className="text-sm font-semibold text-[#212529]">Recent</h3>
+          </Link>
         </div>
         <div className="text-xs px-2 py-0.5 rounded-full bg-[#F8F9FA] text-[#495057]">
           {activity.date}
