@@ -232,30 +232,7 @@ const ShareResourceModal: React.FC<ShareResourceModalProps> = ({
               </div>
             </div>
 
-            {/* Rating & Learning Section */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-
-              <FormField
-                control={form.control}
-                name="learningOutcome"
-                render={({ field }) => (
-                  <FormItem className="col-span-1 sm:col-span-2">
-                    <FormLabel className="text-[#212529] font-medium">
-                      What did you learn?
-                    </FormLabel>
-                    <FormControl>
-                      <Textarea
-                        placeholder="E.g., Learned the basics of React hooks"
-                        className="min-h-[100px] border-[#DEE2E6] focus:border-[#007BFF] focus:ring-[#007BFF]"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage className="text-[#DC3545]" />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
+            <FormField
                 control={form.control}
                 name="recommendedLevel"
                 render={({ field }) => (
@@ -280,6 +257,31 @@ const ShareResourceModal: React.FC<ShareResourceModalProps> = ({
                 )}
               />
 
+            {/* Rating & Learning Section */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+              <FormField
+                control={form.control}
+                name="learningOutcome"
+                render={({ field }) => (
+                  <FormItem className="col-span-1 sm:col-span-2">
+                    <FormLabel className="text-[#212529] font-medium">
+                      What did you learn?
+                    </FormLabel>
+                    <FormControl>
+                      <Textarea
+                        placeholder="E.g., Learned the basics of React hooks"
+                        className="min-h-[100px] border-[#DEE2E6] focus:border-[#007BFF] focus:ring-[#007BFF]"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage className="text-[#DC3545]" />
+                  </FormItem>
+                )}
+              />
+
+
+
               <FormField
                 control={form.control}
                 name="generalThoughts"
@@ -301,7 +303,7 @@ const ShareResourceModal: React.FC<ShareResourceModalProps> = ({
               />
             </div>
 
-            <DialogFooter className="flex justify-end space-x-2">
+            <DialogFooter className="flex justify-self-center items-center space-x-2">
               <Button
                 type="button"
                 variant="outline"
