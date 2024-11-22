@@ -56,7 +56,7 @@ const AuthorInfo: React.FC<AuthorInfoProps> = ({
   const levelInfo = getUserLevelInfo(level);
   const [isFollowing, setIsFollowing] = useState(false);
 
-  const handleFollow = (e) => {
+  const handleFollow = (e: { preventDefault: () => void; }) => {
     e.preventDefault();
     setIsFollowing(true);
     console.log(`Following ${name}`);
