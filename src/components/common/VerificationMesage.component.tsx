@@ -20,7 +20,7 @@ const VerificationMessage: React.FC<VerificationMessageProps> = ({ open, onClose
           </DialogDescription>
         </DialogHeader>
         <DialogFooter className="flex justify-center pt-4">
-          <Button onClick={onClose} className="bg-[#007BFF] text-white hover:bg-[#0056b3]">
+          <Button onClick={onClose} className="bg-[#007BFF] text-white rounded-full hover:bg-[#0056b3]">
             Close
           </Button>
         </DialogFooter>
