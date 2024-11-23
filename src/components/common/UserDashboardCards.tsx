@@ -1,6 +1,7 @@
 import React from 'react';
 import RankCard from './RankCard.component';
-import ActivityCard from './ActivityCard.component';
+import StatusOfSubmissionCard from './StatusOfSubmission.component';
+import ActivityCard from './RecentActivitiesCard.component';
 
 interface UserDashboardCardsProps {
   navUser: {
@@ -35,7 +36,14 @@ const UserDashboardCards: React.FC<UserDashboardCardsProps> = ({ navUser, levelI
         levelInfo={levelInfo}
         nextLevelInfo={nextLevelInfo}
       />
-      <ActivityCard activity={activity} />
+      <StatusOfSubmissionCard activity={activity} />
+      <ActivityCard
+      activities={[
+        { description: "Completed React Tutorial", time: "2 hours ago" },
+        { description: "Saved Python Course", time: "5 hours ago" },
+        { description: "Earned 'Quick Learner' badge", time: "1 day ago" },
+      ]}
+    />
     </div>
   );
 };

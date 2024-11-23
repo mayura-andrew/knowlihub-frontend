@@ -141,6 +141,7 @@ const ResourceList: React.FC = () => {
             <ResourceCard key={resource.id} resource={resource} />
           ))}
         </div>
+
       </div>
     </div>
   );

@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Card, CardHeader, CardTitle, CardContent } from '../ui/card';
+import { Trophy } from 'lucide-react';
 
 interface RankCardProps {
   navUser: {
@@ -20,75 +22,54 @@ interface RankCardProps {
 
 const RankCard: React.FC<RankCardProps> = ({ navUser, levelInfo, nextLevelInfo }) => {
   return (
-    <div className="bg-white border border-[#DEE2E6] p-3 rounded-lg transition-all duration-200 hover:shadow-sm">
-      {/* Header */}
-      <div className="flex items-center justify-between mb-2">
-        <h3 className="text-sm font-semibold text-[#212529] flex items-center">
-          <span className="mr-2 text-md">🏆</span>
-          Your Rank
-        </h3>
-        <div className="relative group">
-          <div className="bg-gradient-to-r from-[#007BFF] to-[#28A745] rounded-full px-2 py-0.5 
-                        shadow-sm hover:shadow-md transition-all duration-200">
-            <span className="text-white font-medium text-xs">
-              #{navUser.rank}
-            </span>
+    <Card className="mb-4 bg-white">
+      <CardHeader className="pb-2">
+        <CardTitle className="text-sm font-medium flex items-center">
+          <Trophy className="w-4 h-4 mr-2 text-[#FFC107]" />
+          Your Progress
+        </CardTitle>
+      </CardHeader>
+      <CardContent>
+        <div className="space-y-3">
+          <div className="flex items-center justify-between">
+            <span className="text-sm text-[#495057]">Current Rank</span>
+            <span className="font-semibold text-[#212529]">Level {navUser.rank}</span>
+          </div>
+          <div className="flex items-center justify-center bg-slate-300 rounded-md">
+            <div className="flex items-center text-center">
+              <span className="mr-1">{levelInfo.emoji}</span>
+              <span className="font-semibold text-[#212529]">{levelInfo.title}</span>
+            </div>
+          </div>
+          <div className="w-full bg-[#F8F9FA] rounded-full h-2">
+            <div 
+              className="bg-gradient-to-r from-[#007BFF] to-[#28A745] duration-300 h-2 rounded-full transition-all"
+              style={{ width: `${(navUser.points / navUser.nextLevelPoints) * 100}%` }}
+            />
+          </div>
+          <div className="flex items-center justify-between text-xs">
+            <span className="text-[#6C757D]">{navUser.points} points</span>
+            <span className="text-[#6C757D]">{navUser.nextLevelPoints} points needed</span>
           </div>
         </div>
-        
-      </div>
-
-      {/* Level Info */}
-      <div className="flex flex-col items-center space-y-2">
-        <div className={`
-          px-2 py-0.5 rounded-full ${levelInfo?.color} 
-          shadow-sm hover:shadow-md transition-all duration-200
-          flex items-center justify-center space-x-1
-        `}>
-          <span className="text-sm">{levelInfo?.emoji}</span>
-          <span className="font-medium text-xs">{levelInfo?.title}</span>
-        </div>
-
         {nextLevelInfo && (
-          <div className="w-full space-y-1">
-            <div className="flex justify-between items-center text-xs">
+          <div className="mt-4">
+            <div className="flex items-center justify-between text-xs bg-slate-100 rounded-md p-1">
               <span className="text-[#495057]">Next Level</span>
               <div className="flex items-center text-[#212529] font-medium">
                 <span className="mr-1">{nextLevelInfo.emoji}</span>
                 {nextLevelInfo.title}
               </div>
             </div>
-
-            <div className="relative pt-1">
-              <div className="flex justify-between items-center text-xs text-[#495057] mb-1">
-                <span>Progress</span>
-                <span>{Math.round((navUser.points / navUser.nextLevelPoints) * 100)}%</span>
-              </div>
-              <div className="overflow-hidden h-2 text-xs flex rounded-full bg-[#F8F9FA]">
-                <div
-                  style={{
-                    width: `${(navUser.points / navUser.nextLevelPoints) * 100}%`
-                  }}
-                  className="shadow-none flex flex-col text-center whitespace-nowrap 
-                            text-white justify-center bg-gradient-to-r from-[#007BFF] to-[#28A745]
-                            transition-all duration-300"
-                />
-              </div>
-              <div className="mt-1 text-xs text-[#495057] text-right">
-                <span className="font-medium text-[#212529]">
-                  {navUser.nextLevelPoints - navUser.points}
-                </span> points needed
-              </div>
-            </div>
           </div>
         )}
-      </div>
-      <div className="mt-4 text-center">
-        <Link to="/more-info" className="text-sm text-[#007BFF] hover:underline">
-          More Info
-        </Link>
-      </div>
-    </div>
+        <div className="mt-4 text-center">
+          <Link to="/more-info" className="text-sm text-[#007BFF] hover:underline">
+            More Info
+          </Link>
+        </div>
+      </CardContent>
+    </Card>
   );
 };
 

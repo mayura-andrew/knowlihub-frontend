@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Avatar, AvatarImage, AvatarFallback } from '../ui/avatar';
+import { Badge } from '../ui/badge';
 
 const getUserLevelInfo = (level: number) => {
   if (level < 2) return {
@@ -96,11 +98,10 @@ const AuthorInfo: React.FC<AuthorInfoProps> = ({
         to={profileLink} 
         className="flex-shrink-0 rounded-full overflow-hidden ring-2 ring-[#007BFF]/10"
       >
-        <img
-          src={avatar}
-          alt={name}
-          className={`${sizeClasses[size].avatar} object-cover`}
-        />
+        <Avatar className={`${sizeClasses[size].avatar}`}>
+          <AvatarImage src={avatar} alt={name} />
+          <AvatarFallback>{name.charAt(0)}</AvatarFallback>
+        </Avatar>
       </Link>
       
       <div className="ml-2.5 flex-1 min-w-0 text-left">
@@ -121,14 +122,14 @@ const AuthorInfo: React.FC<AuthorInfoProps> = ({
           {position}
         </p>
       </div>
-
-      <div className={`
+      <Badge className={`
         ml-2 flex-shrink-0 rounded-full
         ${levelInfo.color} ${sizeClasses[size].badge}
         font-medium shadow-sm
-      `}>
+      `} variant='outline'>
         {levelInfo.emoji} {size !== 'small' && levelInfo.title}
-      </div>
+      </Badge>
+
 
       {showFollowButton && size !== 'small' && (
         <button

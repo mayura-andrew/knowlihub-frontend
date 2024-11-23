@@ -32,7 +32,7 @@ const Navbar: React.FC<NavbarProps> = ({
           <div className="flex items-center justify-between h-20">
             {/* Logo */}
             <div className="flex items-center">
-              <Link to="/" className="flex items-center group">
+              <Link to="/" className="flex group">
                 <span className="text-2xl">🧠</span>
                 <span className="ml-2 text-2xl font-semibold text-[#212529] group-hover:text-[#007BFF] transition-colors">
                   Knowlihub

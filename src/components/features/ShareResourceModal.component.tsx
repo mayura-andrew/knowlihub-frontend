@@ -88,7 +88,7 @@ const ShareResourceModal: React.FC<ShareResourceModalProps> = ({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[600px] bg-white font-['Roboto'] p-6 overflow-y-auto max-h-[80vh]">
+      <DialogContent className="sm:max-w-[600px] bg-white font-['Roboto'] p-6 overflow-y-auto max-h-[80vh] custom-scrollbar">
         <DialogHeader>
           <DialogTitle className="text-[#212529] text-2xl font-semibold">
             Share Learning Resource
