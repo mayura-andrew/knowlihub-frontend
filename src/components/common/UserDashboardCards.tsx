@@ -2,6 +2,8 @@ import React from 'react';
 import RankCard from './RankCard.component';
 import StatusOfSubmissionCard from './StatusOfSubmission.component';
 import ActivityCard from './RecentActivitiesCard.component';
+import ProgressCard from './ProgressCard.component';
+import StudyTipsCard from './StudyTips.component';
 
 interface UserDashboardCardsProps {
   navUser: {
@@ -26,11 +28,18 @@ interface UserDashboardCardsProps {
     resource: string;
     status: string;
   };
+  studyTip: {
+    text: string
+    author: string
+  }
 }
 
-const UserDashboardCards: React.FC<UserDashboardCardsProps> = ({ navUser, levelInfo, nextLevelInfo, activity }) => {
+
+const UserDashboardCards: React.FC<UserDashboardCardsProps> = ({ navUser, levelInfo, nextLevelInfo, activity, studyTip }) => {
   return (
     <div className="space-y-6">
+      <StudyTipsCard tip={studyTip} />
+      <ProgressCard />
       <RankCard 
         navUser={navUser}
         levelInfo={levelInfo}

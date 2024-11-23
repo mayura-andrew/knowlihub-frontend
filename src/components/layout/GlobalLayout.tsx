@@ -62,6 +62,12 @@ const userData = {
     }
 };
 
+const studyTip = {
+    text: "The best way to predict the future is to create it.",
+    author: "Peter Drucker"
+};
+
+
 const GlobalLayout: React.FC<GlobalLayoutProps> = ({ 
     children, 
     hideLeftSidebar = false, 
@@ -109,42 +115,44 @@ const GlobalLayout: React.FC<GlobalLayoutProps> = ({
             <div className="flex flex-1 mt-20">
                 {/* Left Sidebar */}
                 {!hideLeftSidebar && (
-                    <aside className="w-64 bg-[#F8F9FA] border-r border-[#DEE2E6] overflow-y-auto max-h-auto custom-scrollbar p-3">
-                        <h3 className="text-lg font-semibold mb-4 text-[#212529] flex items-center">
-                            <span className="mr-2">🗂️</span> Categories
-                        </h3>
-                        <ul className="space-y-2">
-                            <li className="text-sm text-[#495057] hover:bg-[#007BFF]/10 p-2 rounded cursor-pointer flex items-center">
-                                <span className="mr-2">⭐</span> Top Recommendations
-                            </li>
-                            <li className="text-sm text-[#495057] hover:bg-[#007BFF]/10 p-2 rounded cursor-pointer flex items-center">
-                                <span className="mr-2">🆕</span> Latest
-                            </li>
-                            {categories.map((category, index) => (
-                                <li
-                                    key={index}
-                                    className="text-sm text-[#495057] hover:bg-[#007BFF]/10 p-2 rounded cursor-pointer flex items-center"
-                                >
-                                    <input
-                                        type="checkbox"
-                                        className="mr-2"
-                                        checked={selectedCategories.includes(category)}
-                                        onChange={() => handleCategoryChange(category)} />
-                                    <span className="mr-2">📚</span>
-                                    {category}
-                                </li>
-                            ))}
-                        </ul>
-
-                        <div className="border-t border-[#DEE2E6] my-6" />
-
-
-                        <SidebarInfo 
-                            socialLinks={socialLinks}
-                            footerLinks={footerLinks} 
-                            currentYear={currentYear}
-                        />
-                    </aside>
+                  <aside className="w-64 bg-white border-r border-[#DEE2E6] overflow-y-auto max-h-auto custom-scrollbar p-4 shadow-sm">
+                    <h3 className="text-xl font-semibold mb-4 text-[#212529] flex items-center">
+                      <span className="mr-2">🗂️</span> Categories
+                    </h3>
+                    <ul className="space-y-3">
+                      <li className="text-base text-[#495057] hover:bg-[#007BFF]/10 p-3 rounded-lg cursor-pointer flex items-center transition-colors duration-200">
+                        <span className="mr-2">⭐</span> Top Recommendations
+                      </li>
+                      <li className="text-base text-[#495057] hover:bg-[#007BFF]/10 p-3 rounded-lg cursor-pointer flex items-center transition-colors duration-200">
+                        <span className="mr-2">🆕</span> Latest
+                      </li>
+                      {categories.map((category, index) => (
+                        <li
+                          key={index}
+                          className="text-base text-[#495057] hover:bg-[#007BFF]/10 p-3 rounded-lg cursor-pointer flex items-center transition-colors duration-200"
+                        >
+                          <label className="flex items-center w-full cursor-pointer">
+                            <input
+                              type="checkbox"
+                              className="mr-2"
+                              checked={selectedCategories.includes(category)}
+                              onChange={() => handleCategoryChange(category)}
+                            />
+                            <span className="mr-2">📚</span>
+                            {category}
+                          </label>
+                        </li>
+                      ))}
+                    </ul>
+                
+                    <div className="border-t border-[#DEE2E6] my-6" />
+                
+                    <SidebarInfo 
+                      socialLinks={socialLinks}
+                      footerLinks={footerLinks} 
+                      currentYear={currentYear}
+                    />
+                  </aside>
                 )}
 
                 {/* Main Content */}
@@ -162,7 +170,8 @@ const GlobalLayout: React.FC<GlobalLayoutProps> = ({
                             navUser={userData.navUser}
                             levelInfo={userData.levelInfo}
                             nextLevelInfo={userData.nextLevelInfo}
-                            activity={userData.activity} />
+                            activity={userData.activity}
+                            studyTip={studyTip} />
 
                         <div className="border-t border-[#DEE2E6] my-6" />
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Plus, Link as LinkIcon, X } from 'lucide-react';
+import { Plus, Link as LinkIcon, X, Loader2 } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -29,16 +29,20 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 
 const formSchema = z.object({
   title: z.string().min(1, 'Title is required'),
   url: z.string().url('Please enter a valid URL'),
+  description: z.string().min(10, 'Description should be at least 10 characters'),
   category: z.string().min(1, 'Please select a category'),
   tags: z.array(z.string()),
+  prerequisites: z.array(z.string()),
   rating: z.number().min(1).max(5),
   learningOutcome: z.string().min(10, 'Please share what you learned'),
   recommendedLevel: z.enum(['beginner', 'intermediate', 'advanced']),
   generalThoughts: z.string().optional(),
+  imageUrl: z.string().optional(),
 });
 
 interface ShareResourceModalProps {
@@ -46,29 +50,72 @@ interface ShareResourceModalProps {
   onOpenChange: (open: boolean) => void;
 }
 
-const ShareResourceModal: React.FC<ShareResourceModalProps> = ({
-  open,
-  onOpenChange,
-}) => {
-  const [tags, setTags] = React.useState<string[]>([]);
-  const [newTag, setNewTag] = React.useState('');
-  const [rating, setRating] = React.useState(0);
 
-  const form = useForm<z.infer<typeof formSchema>>({
+const ShareResourceModal: React.FC<ShareResourceModalProps> = ({ open, onOpenChange }) => {
+  const [tags, setTags] = React.useState([]);
+  const [prerequisites, setPrerequisites] = React.useState([]);
+  const [newTag, setNewTag] = React.useState('');
+  const [newPrerequisite, setNewPrerequisite] = React.useState('');
+  const [rating, setRating] = React.useState(0);
+  const [isFetching, setIsFetching] = React.useState(false);
+  const [fetchError, setFetchError] = React.useState('');
+
+  const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
       title: '',
       url: '',
+      description: '',
       category: '',
       tags: [],
+      prerequisites: [],
       rating: 0,
       learningOutcome: '',
       recommendedLevel: 'beginner',
       generalThoughts: '',
+      imageUrl: '',
     },
   });
 
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
+  const fetchResourceMetadata = async (url) => {
+    if (!url) return;
+  
+    setIsFetching(true);
+    setFetchError('');
+  
+    try {
+      const response = await fetch(`http://localhost:3001/api/fetchMetaData?url=${encodeURIComponent(url)}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+  
+      if (!response.ok) {
+        throw new Error('Failed to fetch resource details');
+      }
+  
+      const metadata = await response.json();
+  
+      form.setValue('title', metadata.title);
+      form.setValue('description', metadata.description);
+      form.setValue('imageUrl', metadata.image);
+    } catch (error) {
+      setFetchError('Failed to fetch resource details. You can enter them manually.');
+      console.error('Failed to fetch resource details', error);
+    } finally {
+      setIsFetching(false);
+    }
+  };
+
+  React.useEffect(() => {
+    const url = form.watch('url');
+    if (url && url.startsWith('http')) {
+      fetchResourceMetadata(url);
+    }
+  }, [form.watch('url')]);
+
+  const onSubmit = (values) => {
     console.log(values);
     onOpenChange(false);
   };
@@ -81,14 +128,27 @@ const ShareResourceModal: React.FC<ShareResourceModalProps> = ({
     }
   };
 
-  const removeTag = (tagToRemove: string) => {
+  const addPrerequisite = () => {
+    if (newPrerequisite && !prerequisites.includes(newPrerequisite)) {
+      setPrerequisites([...prerequisites, newPrerequisite]);
+      form.setValue('prerequisites', [...prerequisites, newPrerequisite]);
+      setNewPrerequisite('');
+    }
+  };
+
+  const removeTag = (tagToRemove) => {
     setTags(tags.filter(tag => tag !== tagToRemove));
     form.setValue('tags', tags.filter(tag => tag !== tagToRemove));
   };
 
+  const removePrerequisite = (prereqToRemove) => {
+    setPrerequisites(prerequisites.filter(prereq => prereq !== prereqToRemove));
+    form.setValue('prerequisites', prerequisites.filter(prereq => prereq !== prereqToRemove));
+  };
+
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[600px] bg-white font-['Roboto'] p-6 overflow-y-auto max-h-[80vh] custom-scrollbar">
+      <DialogContent className="sm:max-w-[800px] bg-white font-['Roboto'] p-6 overflow-y-auto max-h-[90vh] custom-scrollbar">
         <DialogHeader>
           <DialogTitle className="text-[#212529] text-2xl font-semibold">
             Share Learning Resource
@@ -96,33 +156,15 @@ const ShareResourceModal: React.FC<ShareResourceModalProps> = ({
         </DialogHeader>
         
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-            {/* Resource Details Section */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <FormField
-                control={form.control}
-                name="title"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-[#212529] font-medium">Title</FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder="Enter resource title"
-                        className="border-[#DEE2E6] focus:border-[#007BFF] focus:ring-[#007BFF]"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage className="text-[#DC3545]" />
-                  </FormItem>
-                )}
-              />
-
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+            {/* URL Section with Auto-fetch Indicator */}
+            <div className="space-y-4">
               <FormField
                 control={form.control}
                 name="url"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-[#212529] font-medium">URL</FormLabel>
+                    <FormLabel className="text-[#212529] font-medium">Resource URL</FormLabel>
                     <FormControl>
                       <div className="relative">
                         <LinkIcon className="absolute left-3 top-3 h-4 w-4 text-[#6C757D]" />
@@ -131,6 +173,11 @@ const ShareResourceModal: React.FC<ShareResourceModalProps> = ({
                           className="pl-10 border-[#DEE2E6] focus:border-[#007BFF] focus:ring-[#007BFF]"
                           {...field}
                         />
+                        {isFetching && (
+                          <div className="absolute right-3 top-3">
+                            <Loader2 className="h-4 w-4 animate-spin text-[#007BFF]" />
+                          </div>
+                        )}
                       </div>
                     </FormControl>
                     <FormMessage className="text-[#DC3545]" />
@@ -138,30 +185,185 @@ const ShareResourceModal: React.FC<ShareResourceModalProps> = ({
                 )}
               />
 
-              <FormField
-                control={form.control}
-                name="category"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-[#212529] font-medium">Category</FormLabel>
-                    <Select onValueChange={field.onChange} defaultValue={field.value}>
-                      <FormControl>
-                        <SelectTrigger className="border-[#DEE2E6] focus:ring-[#007BFF]">
-                          <SelectValue placeholder="Select a category" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        <SelectItem value="programming">Programming</SelectItem>
-                        <SelectItem value="design">Design</SelectItem>
-                        <SelectItem value="business">Business</SelectItem>
-                        <SelectItem value="science">Science</SelectItem>
-                      </SelectContent>
-                    </Select>
-                    <FormMessage className="text-[#DC3545]" />
-                  </FormItem>
-                )}
-              />
+              {fetchError && (
+                <Alert variant="destructive" className="bg-red-50 text-red-800 border-red-200">
+                  <AlertDescription>{fetchError}</AlertDescription>
+                </Alert>
+              )}
+            </div>
 
+            {/* Resource Details Section */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              {/* Left Column */}
+              <div className="space-y-4">
+                <FormField
+                  control={form.control}
+                  name="title"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-[#212529] font-medium">Title</FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder="Enter resource title"
+                          className="border-[#DEE2E6] focus:border-[#007BFF] focus:ring-[#007BFF]"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage className="text-[#DC3545]" />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="description"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-[#212529] font-medium">Description</FormLabel>
+                      <FormControl>
+                        <Textarea
+                          placeholder="Resource description..."
+                          className="min-h-[120px] border-[#DEE2E6] focus:border-[#007BFF] focus:ring-[#007BFF]"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage className="text-[#DC3545]" />
+                    </FormItem>
+                  )}
+                />
+              </div>
+
+              {/* Right Column */}
+              <div className="space-y-4">
+                <FormField
+                  control={form.control}
+                  name="imageUrl"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-[#212529] font-medium">Preview Image</FormLabel>
+                      <div className="border rounded-lg overflow-hidden bg-gray-50 aspect-video flex items-center justify-center">
+                        {field.value ? (
+                          <img
+                            src={field.value}
+                            alt="Resource preview"
+                            className="w-full h-full object-cover"
+                          />
+                        ) : (
+                          <div className="text-[#6C757D] text-sm">No image available</div>
+                        )}
+                      </div>
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="category"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-[#212529] font-medium">Category</FormLabel>
+                      <Select onValueChange={field.onChange} defaultValue={field.value}>
+                        <FormControl>
+                          <SelectTrigger className="border-[#DEE2E6] focus:ring-[#007BFF]">
+                            <SelectValue placeholder="Select a category" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          <SelectItem value="programming">Programming</SelectItem>
+                          <SelectItem value="design">Design</SelectItem>
+                          <SelectItem value="business">Business</SelectItem>
+                          <SelectItem value="science">Science</SelectItem>
+                        </SelectContent>
+                      </Select>
+                      <FormMessage className="text-[#DC3545]" />
+                    </FormItem>
+                  )}
+                />
+              </div>
+            </div>
+
+            {/* Prerequisites Section */}
+            <div className="space-y-2">
+              <FormLabel className="text-[#212529] font-medium">Prerequisites (Optional)</FormLabel>
+              <div className="flex flex-wrap gap-2 mb-2">
+                {prerequisites.map(prereq => (
+                  <Badge
+                    key={prereq}
+                    variant="secondary"
+                    className="bg-[#F8F9FA] text-[#495057] hover:bg-[#E9ECEF] flex items-center gap-1"
+                  >
+                    {prereq}
+                    <button
+                      type="button"
+                      onClick={() => removePrerequisite(prereq)}
+                      className="ml-1 hover:text-[#DC3545]"
+                    >
+                      <X size={14} />
+                    </button>
+                  </Badge>
+                ))}
+              </div>
+              <div className="flex gap-2">
+                <Input
+                  value={newPrerequisite}
+                  onChange={(e) => setNewPrerequisite(e.target.value)}
+                  placeholder="Add a prerequisite (e.g., 'Basic HTML', 'JavaScript fundamentals')"
+                  className="border-[#DEE2E6] focus:border-[#007BFF] focus:ring-[#007BFF]"
+                  onKeyPress={(e) => e.key === 'Enter' && (e.preventDefault(), addPrerequisite())}
+                />
+                <Button
+                  type="button"
+                  onClick={addPrerequisite}
+                  variant="outline"
+                  className="border-[#DEE2E6] hover:bg-[#F8F9FA] text-[#007BFF]"
+                >
+                  <Plus size={16} />
+                </Button>
+              </div>
+            </div>
+
+            {/* Tags Section */}
+            <div className="space-y-2">
+              <FormLabel className="text-[#212529] font-medium">Tags</FormLabel>
+              <div className="flex flex-wrap gap-2 mb-2">
+                {tags.map(tag => (
+                  <Badge
+                    key={tag}
+                    variant="secondary"
+                    className="bg-[#F8F9FA] text-[#495057] hover:bg-[#E9ECEF] flex items-center gap-1"
+                  >
+                    {tag}
+                    <button
+                      type="button"
+                      onClick={() => removeTag(tag)}
+                      className="ml-1 hover:text-[#DC3545]"
+                    >
+                      <X size={14} />
+                    </button>
+                  </Badge>
+                ))}
+              </div>
+              <div className="flex gap-2">
+                <Input
+                  value={newTag}
+                  onChange={(e) => setNewTag(e.target.value)}
+                  placeholder="Add a tag"
+                  className="border-[#DEE2E6] focus:border-[#007BFF] focus:ring-[#007BFF]"
+                  onKeyPress={(e) => e.key === 'Enter' && (e.preventDefault(), addTag())}
+                />
+                <Button
+                  type="button"
+                  onClick={addTag}
+                  variant="outline"
+                  className="border-[#DEE2E6] hover:bg-[#F8F9FA] text-[#007BFF]"
+                >
+                  <Plus size={16} />
+                </Button>
+              </div>
+            </div>
+
+            {/* Rating & Level Section */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <FormField
                 control={form.control}
                 name="rating"
@@ -192,47 +394,7 @@ const ShareResourceModal: React.FC<ShareResourceModalProps> = ({
                 )}
               />
 
-              <div className="col-span-1 sm:col-span-2">
-                <FormLabel className="text-[#212529] font-medium">Tags</FormLabel>
-                <div className="flex flex-wrap gap-2 mb-2">
-                  {tags.map(tag => (
-                    <Badge
-                      key={tag}
-                      variant="secondary"
-                      className="bg-[#F8F9FA] text-[#495057] hover:bg-[#E9ECEF] flex items-center gap-1"
-                    >
-                      {tag}
-                      <button
-                        type="button"
-                        onClick={() => removeTag(tag)}
-                        className="ml-1 hover:text-[#DC3545]"
-                      >
-                        <X size={14} />
-                      </button>
-                    </Badge>
-                  ))}
-                </div>
-                <div className="flex gap-2">
-                  <Input
-                    value={newTag}
-                    onChange={(e) => setNewTag(e.target.value)}
-                    placeholder="Add a tag"
-                    className="border-[#DEE2E6] focus:border-[#007BFF] focus:ring-[#007BFF]"
-                    onKeyPress={(e) => e.key === 'Enter' && (e.preventDefault(), addTag())}
-                  />
-                  <Button
-                    type="button"
-                    onClick={addTag}
-                    variant="outline"
-                    className="border-[#DEE2E6] hover:bg-[#F8F9FA] text-[#007BFF]"
-                  >
-                    <Plus size={16} />
-                  </Button>
-                </div>
-              </div>
-            </div>
-
-            <FormField
+              <FormField
                 control={form.control}
                 name="recommendedLevel"
                 render={({ field }) => (
@@ -256,15 +418,15 @@ const ShareResourceModal: React.FC<ShareResourceModalProps> = ({
                   </FormItem>
                 )}
               />
+            </div>
 
-            {/* Rating & Learning Section */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-
+            {/* Learning Outcome & General Thoughts Section */}
+            <div className="space-y-4">
               <FormField
                 control={form.control}
                 name="learningOutcome"
                 render={({ field }) => (
-                  <FormItem className="col-span-1 sm:col-span-2">
+                  <FormItem>
                     <FormLabel className="text-[#212529] font-medium">
                       What did you learn?
                     </FormLabel>
@@ -280,13 +442,11 @@ const ShareResourceModal: React.FC<ShareResourceModalProps> = ({
                 )}
               />
 
-
-
               <FormField
                 control={form.control}
                 name="generalThoughts"
                 render={({ field }) => (
-                  <FormItem className="col-span-1 sm:col-span-2">
+                  <FormItem>
                     <FormLabel className="text-[#212529] font-medium">
                       General Thoughts (Optional)
                     </FormLabel>
