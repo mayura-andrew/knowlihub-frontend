@@ -110,7 +110,7 @@ const GlobalLayout: React.FC<GlobalLayoutProps> = ({
 
     return (
         <div className="bg-white min-h-screen flex flex-col font-['Roboto']">
-            <Navbar user={userData.navUser} />
+            <Navbar />
 
             <div className="flex flex-1 mt-20">
                 {/* Left Sidebar */}

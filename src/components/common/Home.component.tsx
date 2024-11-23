@@ -1,9 +1,10 @@
 import { Rocket, TrendingUp, Tag, Clock, Bell } from 'lucide-react';
 import ResourceList from '../features/ResourceList';
+import { Avatar, AvatarImage, AvatarFallback } from '@radix-ui/react-avatar';
 
 const HomePage = () => {
   // This would normally come from your auth context/provider
-  const isSignedIn= false // For demo purposes
+  const isSignedIn= true // For demo purposes
   const user= ({ name: 'John' }); // Mock user data
 
   
@@ -51,7 +52,7 @@ const HomePage = () => {
       </section>
 
         {/* Latest  Learning Resource Section */}
-    <section className="bg-[#E3F2FD] rounded-lg shadow-sm p-8">
+    <section className="bg-[#F8F9FA] rounded-lg shadow-sm p-8">
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-xl font-semibold text-[#212529] flex items-center">
             <Clock className="w-5 h-5 mr-2 text-[#28A745]" />
@@ -67,7 +68,7 @@ const HomePage = () => {
       </section>
 
       {/* Popular Tags */}
-      <section className="bg-[#F8F9FA] rounded-lg shadow-sm p-8">
+      <section className="bg-[#E3F2FD] rounded-lg shadow-sm p-8">
         <h2 className="text-xl font-semibold text-[#212529] flex items-center mb-6">
           <Tag className="w-5 h-5 mr-2 text-[#17A2B8]" />
           Popular Tags
@@ -180,24 +181,30 @@ const HomePage = () => {
               name: "Sarah L.",
               role: "Software Developer",
               quote: "This platform has completely transformed my learning journey!",
+              avatar: "https://randomuser.me/api/portraits/women/1.jpg",
+
             },
             {
               name: "Michael R.",
               role: "Data Scientist",
               quote: "The curated resources saved me countless hours of searching.",
+              avatar: "https://randomuser.me/api/portraits/men/1.jpg",
+
             },
             {
               name: "Emily K.",
               role: "UX Designer",
               quote: "The community here is incredibly supportive and knowledgeable.",
+              avatar: "https://randomuser.me/api/portraits/women/2.jpg",
             },
           ].map((testimonial) => (
-            <div key={testimonial.name} className="text-center">
-              <div className="w-16 h-16 rounded-full bg-[#007BFF]/10 mx-auto mb-4 flex items-center justify-center">
-                <span className="text-2xl text-[#007BFF]">
-                  {testimonial.name[0]}
-                </span>
-              </div>
+<div key={testimonial.name} className="text-center">
+            <Avatar className="w-16 h-16 bg-[#007BFF]/10 mx-auto mb-4">
+              <AvatarImage src={testimonial.avatar} alt={testimonial.name}  className='rounded-full object-cover'/>
+              <AvatarFallback className="text-2xl text-[#007BFF]">
+                {testimonial.name[0]}
+              </AvatarFallback>
+            </Avatar>
               <p className="text-[#495057] italic mb-4">"{testimonial.quote}"</p>
               <p className="font-semibold text-[#212529]">{testimonial.name}</p>
               <p className="text-sm text-[#6C757D]">{testimonial.role}</p>

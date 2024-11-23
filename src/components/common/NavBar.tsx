@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Search, Plus } from 'lucide-react';
 import ShareResourceModal from '../features/ShareResourceModal.component';
+import AuthModal from './AuthModal.component';
 
 interface NavbarProps {
   user?: {
@@ -19,11 +20,31 @@ const Navbar: React.FC<NavbarProps> = ({
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [shareModalOpen, setShareModalOpen] = useState(false);
+  const [authModalOpen, setAuthModalOpen] = useState(false);
+  const [authType, setAuthType] = useState<'login' | 'signup'>('login');
+
 
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log('Searching for:', searchQuery);
   };
+
+  const openAuthModal = (type: 'login' | 'signup') => {
+    setAuthType(type);
+    setAuthModalOpen(true);
+  }
+
+  const handleAuthSuccess = () => {
+    setAuthModalOpen(false);
+    // Handle additional success logic here, e.g., fetching user data
+  };
+
+  const handleSwitchMode = () => {
+    setAuthType((prevType) => (prevType === 'login' ? 'signup' : 'login'));
+  };
+
+
+
 
   return (
     <>
@@ -37,7 +58,7 @@ const Navbar: React.FC<NavbarProps> = ({
                 <span className="ml-2 text-2xl font-semibold text-[#212529] group-hover:text-[#007BFF] transition-colors">
                   Knowlihub
                 </span>
-                <span className="ml-2 px-2 py-1 text-xs font-thin text-black bg-[#f8f8f8] rounded-full">
+                <span className="ml-2 px-1 py-1 text-xs font-thin text-black bg-[#f8f8f8] rounded-full">
                 Experiment
                 </span>
               </Link>
@@ -116,22 +137,20 @@ const Navbar: React.FC<NavbarProps> = ({
                 </>
               ) : (
                 <div className="flex items-center space-x-3">
-                  <Link to="/login">
                     <Button 
+                      onClick={() => openAuthModal('login')}
                       className="px-6 py-2 rounded-full bg-white text-[#007BFF] border border-[#007BFF] 
                                hover:bg-[#007BFF] hover:text-white transition-all duration-300"
                     >
                       Login
                     </Button>
-                  </Link>
-                  <Link to="/signup">
                     <Button 
+                      onClick={() => openAuthModal('signup')}
                       className="px-6 py-2 rounded-full bg-[#007BFF] text-white border border-[#007BFF]
                                hover:bg-[#0056b3] transition-all duration-300"
                     >
                       Sign Up
                     </Button>
-                  </Link>
                 </div>
               )}
             </div>
@@ -141,6 +160,15 @@ const Navbar: React.FC<NavbarProps> = ({
 
       {/* Share Resource Modal */}
       <ShareResourceModal open={shareModalOpen} onOpenChange={() => setShareModalOpen(false)} />
+
+      {/* Auth Modal */}
+      <AuthModal 
+        open={authModalOpen} 
+        onOpenChange={() => setAuthModalOpen(false)} 
+        type={authType}
+        onSwitchMode={handleSwitchMode}
+        onSuccess={handleAuthSuccess}
+      />
     </>
   );
 };
