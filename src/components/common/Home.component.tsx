@@ -7,7 +7,7 @@ import PopularTags from './PopularTagSection.component';
 
 const HomePage = () => {
   // This would normally come from your auth context/provider
-  const isSignedIn= true // For demo purposes
+  const isSignedIn= false // For demo purposes
   const user= ({ name: 'John' }); // Mock user data
 
   
