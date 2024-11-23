@@ -115,21 +115,21 @@ const GlobalLayout: React.FC<GlobalLayoutProps> = ({
             <div className="flex flex-1 mt-20">
                 {/* Left Sidebar */}
                 {!hideLeftSidebar && (
-                  <aside className="w-64 bg-white border-r border-[#DEE2E6] overflow-y-auto max-h-auto custom-scrollbar p-4 shadow-sm">
+                  <aside className="w-64 bg-[#F8F9FA] border-r border-[#DEE2E6] overflow-y-auto max-h-auto custom-scrollbar p-4 shadow-sm">
                     <h3 className="text-xl font-semibold mb-4 text-[#212529] flex items-center">
                       <span className="mr-2">🗂️</span> Categories
                     </h3>
-                    <ul className="space-y-3">
-                      <li className="text-base text-[#495057] hover:bg-[#007BFF]/10 p-3 rounded-lg cursor-pointer flex items-center transition-colors duration-200">
+                    <ul className="space-y-2">
+                      <li className="text-base text-[#495057] border hover:bg-[#007BFF]/10 p-3 rounded-lg cursor-pointer flex items-center transition-colors duration-200">
                         <span className="mr-2">⭐</span> Top Recommendations
                       </li>
-                      <li className="text-base text-[#495057] hover:bg-[#007BFF]/10 p-3 rounded-lg cursor-pointer flex items-center transition-colors duration-200">
+                      <li className="text-base text-[#495057] border hover:bg-[#007BFF]/10 p-3 rounded-lg cursor-pointer flex items-center transition-colors duration-200">
                         <span className="mr-2">🆕</span> Latest
                       </li>
                       {categories.map((category, index) => (
                         <li
                           key={index}
-                          className="text-base text-[#495057] hover:bg-[#007BFF]/10 p-3 rounded-lg cursor-pointer flex items-center transition-colors duration-200"
+                          className="text-base text-[#495057] hover:bg-[#007BFF]/10 p-1 rounded-lg cursor-pointer flex items-center transition-colors duration-200"
                         >
                           <label className="flex items-center w-full cursor-pointer">
                             <input
@@ -164,7 +164,7 @@ const GlobalLayout: React.FC<GlobalLayoutProps> = ({
 
                 {/* Right Sidebar */}
                 {!hideRightSidebar && (
-                    <aside className="w-64 bg-[#F8F9FA] border-l border-[#DEE2E6] max-h-auto custom-scrollbar p-3">
+                    <aside className="w-64 bg-[#F8F9FA] border-l border-[#DEE2E6] max-h-auto custom-scrollbar p-1">
                         {/* User Dashboard Cards */}
                         <UserDashboardCards
                             navUser={userData.navUser}

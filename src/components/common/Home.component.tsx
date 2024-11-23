@@ -1,39 +1,21 @@
-import { Rocket, TrendingUp, Tag, Clock, Bell } from 'lucide-react';
+import { Rocket, TrendingUp, Clock } from 'lucide-react';
 import ResourceList from '../features/ResourceList';
-import { Avatar, AvatarImage, AvatarFallback } from '@radix-ui/react-avatar';
+import FeaturesSection from './Features.component';
+import TestimonialsAndCTA from './TestimonialsAndCTA.component';
+import WelcomeSection from './WelcomeSection.component';
+import PopularTags from './PopularTagSection.component';
 
 const HomePage = () => {
   // This would normally come from your auth context/provider
-  const isSignedIn= false // For demo purposes
+  const isSignedIn= true // For demo purposes
   const user= ({ name: 'John' }); // Mock user data
 
   
 
   const SignedInContent = () => (
     <div className="grid grid-cols-1 gap-8 max-w-7xl mx-auto">
-      {/* Welcome Hero Section */}
-      <section className="bg-gradient-to-r from-[#D1C4E9] via-[#BBDEFB] to-[#E1BEE7] rounded-lg p-8 text-[#212529]">
-        <div className="flex items-center justify-between">
-          <div>
-            <h1 className="text-3xl font-bold mb-4">Welcome back, {user.name}! 👋</h1>
-            <p className="text-lg opacity-90">Ready to continue your learning journey?</p>
-            <div className="mt-6 flex flex-wrap gap-4">
-              <button className="bg-white text-[#007BFF] px-6 py-2 rounded-full font-medium hover:bg-opacity-90 transition-all flex items-center">
-                <Rocket className="w-4 h-4 mr-2" />
-                Continue Learning
-              </button>
-              <button className="border border-[#007BFF] text-[#007BFF] px-6 py-2 rounded-full font-medium hover:bg-[#007BFF] hover:text-white transition-all">
-                Browse Resources
-              </button>
-            </div>
-          </div>
-          <div className="hidden md:flex items-start gap-4">
-            <button className="p-2 rounded-full bg-white/50 hover:bg-white transition-all">
-              <Bell className="w-6 h-6 text-[#212529]" />
-            </button>
-          </div>
-        </div>
-      </section>
+
+      <WelcomeSection user={user} />
 
       {/* Recommended Resources */}
       <section className="bg-[#F8F9FA] rounded-lg p-8">
@@ -62,13 +44,13 @@ const HomePage = () => {
             View All
           </button>
         </div>
-        <div className="grid gap-6">
+        <div className="grid gap-4">
           <ResourceList />
         </div>
       </section>
 
       {/* Popular Tags */}
-      <section className="bg-[#E3F2FD] rounded-lg shadow-sm p-8">
+      {/* <section className="bg-[#E3F2FD] rounded-lg shadow-sm p-8">
         <h2 className="text-xl font-semibold text-[#212529] flex items-center mb-6">
           <Tag className="w-5 h-5 mr-2 text-[#17A2B8]" />
           Popular Tags
@@ -83,74 +65,54 @@ const HomePage = () => {
             </button>
           ))}
         </div>
-      </section>
+      </section> */}
+      <PopularTags />
     </div>
   );
 
   const GuestContent = () => (
     <div className="grid grid-cols-1 gap-8 max-w-7xl mx-auto">
-      {/* Hero Section */}
-      <section className="bg-gradient-to-br from-[#007BFF] to-[#6C757D] text-white rounded-lg p-8 text-center md:text-left">
-        <div className="max-w-3xl">
-          <h1 className="text-4xl font-bold mb-4">
-            Discover the Best Resources to Accelerate Your Learning Journey!
-          </h1>
-          <p className="text-lg opacity-90 mb-8">
-            Access curated content, connect with learners, and build your skills in one place.
-          </p>
-          <div className="flex flex-col md:flex-row gap-4 justify-center md:justify-start">
-            <button className="bg-white text-[#007BFF] px-6 py-3 rounded-full font-medium hover:bg-opacity-90 transition-all flex items-center justify-center">
-              <Rocket className="w-5 h-5 mr-2" />
-              Sign Up for Free
-            </button>
-            <button className="border border-white text-white px-6 py-3 rounded-full font-medium hover:bg-white hover:text-[#007BFF] transition-all">
-              Explore Resources
-            </button>
+      <section className="relative bg-gradient-to-br from-[#007BFF] to-[#6C757D] text-white rounded-lg overflow-hidden">
+        {/* Background pattern/overlay */}
+        <div className="absolute inset-0 bg-black/10 z-0" />
+        
+        <div className="relative z-10 p-8 flex flex-col items-center text-center">
+          {/* Content */}
+          <div className="max-w-3xl mx-auto">
+            <h1 className="text-4xl lg:text-5xl font-bold mb-6 leading-tight">
+              Discover the Best Resources to Accelerate Your Learning Journey!
+            </h1>
+            <p className="text-lg opacity-90 mb-8">
+              Access curated content, connect with learners, and build your skills in one place.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <button className="bg-white text-[#007BFF] px-6 py-3 rounded-full font-medium hover:bg-opacity-90 transition-all flex items-center justify-center">
+                <Rocket className="w-5 h-5 mr-2" />
+                Sign Up for Free
+              </button>
+              <button className="border border-white text-white px-6 py-3 rounded-full font-medium hover:bg-white hover:text-[#007BFF] transition-all">
+                Explore Resources
+              </button>
+            </div>
           </div>
-        </div>
-      </section>
 
-      {/* Features Section */}
-      <section className="bg-[#E3F2FD] rounded-lg shadow-md p-8">
-        <h2 className="text-2xl font-bold mb-8 text-[#212529] text-center">
-          Why Join Our Platform?
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="flex flex-col items-center text-center">
-            <div className="w-16 h-16 rounded-full bg-[#007BFF]/10 flex items-center justify-center mb-4">
-              <Rocket className="w-8 h-8 text-[#007BFF]" />
-            </div>
-            <h3 className="text-lg font-semibold text-[#212529] mb-2">
-              Personalized Recommendations
-            </h3>
-            <p className="text-[#495057]">
-              Get tailored content that matches your learning goals and interests.
-            </p>
-          </div>
-          <div className="flex flex-col items-center text-center">
-            <div className="w-16 h-16 rounded-full bg-[#28A745]/10 flex items-center justify-center mb-4">
-              <TrendingUp className="w-8 h-8 text-[#28A745]" />
-            </div>
-            <h3 className="text-lg font-semibold text-[#212529] mb-2">
-              High-Quality Resources
-            </h3>
-            <p className="text-[#495057]">
-              Access carefully curated resources vetted by experts in the field.
-            </p>
-          </div>
-          <div className="flex flex-col items-center text-center">
-            <div className="w-16 h-16 rounded-full bg-[#17A2B8]/10 flex items-center justify-center mb-4">
-              <Tag className="w-8 h-8 text-[#17A2B8]" />
-            </div>
-            <h3 className="text-lg font-semibold text-[#212529] mb-2">
-              Engage with Community
-            </h3>
-            <p className="text-[#495057]">
-              Connect with like-minded learners and share knowledge.
-            </p>
+          {/* Floating Elements */}
+         
+          <div className="absolute bottom-8 left-8 bg-white/20 backdrop-blur-sm rounded-lg p-4 animate-float-delay hidden md:block">
+            <div className="w-10 h-10 bg-white/90 rounded-lg shadow-lg" />
           </div>
         </div>
+
+        {/* Decorative elements */}
+        <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2" />
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2" />
+        
+        {/* Gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#007BFF]/20 to-transparent pointer-events-none" />
       </section>
+  
+
+      <FeaturesSection />
 
       {/* Trending Resources Preview */}
       <section className="bg-[#F8F9FA] rounded-lg p-8">
@@ -160,7 +122,7 @@ const HomePage = () => {
             Trending Resources
           </h2>
         </div>
-        <div className="grid gap-6">
+        <div className="grid gap-4">
           <ResourceList />
         </div>
         <div className="mt-6 text-center">
@@ -170,62 +132,7 @@ const HomePage = () => {
         </div>
       </section>
 
-       {/* Testimonials Section */}
-       <section className="bg-[#E3F2FD] rounded-lg shadow-md p-8">
-        <h2 className="text-2xl font-bold mb-8 text-[#212529] text-center">
-          What Our Users Are Saying
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {[
-            {
-              name: "Sarah L.",
-              role: "Software Developer",
-              quote: "This platform has completely transformed my learning journey!",
-              avatar: "https://randomuser.me/api/portraits/women/1.jpg",
-
-            },
-            {
-              name: "Michael R.",
-              role: "Data Scientist",
-              quote: "The curated resources saved me countless hours of searching.",
-              avatar: "https://randomuser.me/api/portraits/men/1.jpg",
-
-            },
-            {
-              name: "Emily K.",
-              role: "UX Designer",
-              quote: "The community here is incredibly supportive and knowledgeable.",
-              avatar: "https://randomuser.me/api/portraits/women/2.jpg",
-            },
-          ].map((testimonial) => (
-<div key={testimonial.name} className="text-center">
-            <Avatar className="w-16 h-16 bg-[#007BFF]/10 mx-auto mb-4">
-              <AvatarImage src={testimonial.avatar} alt={testimonial.name}  className='rounded-full object-cover'/>
-              <AvatarFallback className="text-2xl text-[#007BFF]">
-                {testimonial.name[0]}
-              </AvatarFallback>
-            </Avatar>
-              <p className="text-[#495057] italic mb-4">"{testimonial.quote}"</p>
-              <p className="font-semibold text-[#212529]">{testimonial.name}</p>
-              <p className="text-sm text-[#6C757D]">{testimonial.role}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Final CTA */}
-      <section className="bg-gradient-to-r from-[#007BFF] to-[#6C757D] text-white rounded-lg p-8 text-center">
-        <h2 className="text-3xl font-bold mb-6">
-          Join Thousands of Learners Today!
-        </h2>
-        <p className="text-lg mb-8 opacity-90 max-w-2xl mx-auto">
-          Start your learning journey now and get access to thousands of curated resources.
-        </p>
-        <button className="bg-white text-[#007BFF] px-8 py-3 rounded-full font-medium hover:bg-opacity-90 transition-all inline-flex items-center">
-          <Rocket className="w-5 h-5 mr-2" />
-          Sign Up for Free
-        </button>
-      </section>
+      <TestimonialsAndCTA />
     </div>
   );
 

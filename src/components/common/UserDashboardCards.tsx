@@ -37,7 +37,7 @@ interface UserDashboardCardsProps {
 
 const UserDashboardCards: React.FC<UserDashboardCardsProps> = ({ navUser, levelInfo, nextLevelInfo, activity, studyTip }) => {
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
       <StudyTipsCard tip={studyTip} />
       <ProgressCard />
       <RankCard 

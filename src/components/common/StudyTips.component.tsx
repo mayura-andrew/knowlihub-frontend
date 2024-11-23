@@ -19,7 +19,7 @@ const StudyTipsCard: React.FC<StudyTipsCardProps> = ({ tip }) => {
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="space-y-3">
+        <div className="space-y-2">
           <div className="bg-[#F8F9FA] p-4 rounded-lg">
             <p className="text-[#495057] text-sm italic">"{tip.text}"</p>
             <p className="text-[#212529] text-sm font-medium mt-2">- {tip.author}</p>

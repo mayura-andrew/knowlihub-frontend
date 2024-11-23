@@ -7,6 +7,27 @@ export default {
       fontFamily: {
         sans: ['Roboto', 'ui-sans-serif', 'system-ui']
       },
+      animation: {
+        'float': 'float 6s ease-in-out infinite',
+        'float-delay': 'float 6s ease-in-out 2s infinite',
+        'shimmer': 'shimmer 2s linear infinite',
+        'spin-slow': 'spin 8s linear infinite',
+        'slide': 'slide 3s linear infinite',
+      },
+      keyframes: {
+        float: {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-20px)' },
+        },
+        shimmer: {
+          '0%': { transform: 'translateX(-100%)' },
+          '100%': { transform: 'translateX(100%)' },
+        },
+        slide: {
+          '0%': { transform: 'translateX(-100%)' },
+          '100%': { transform: 'translateX(100%)' },
+        },
+      },
       borderRadius: {
         lg: 'var(--radius)',
         md: 'calc(var(--radius) - 2px)',
@@ -55,6 +76,7 @@ export default {
         },
       },
     },
+
   },
   plugins: [require('tailwindcss-animate'),
     function ({ addUtilities }) {
