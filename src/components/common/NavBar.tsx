@@ -71,7 +71,7 @@ const Navbar: React.FC<NavbarProps> = ({
                   type="text"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="Explore..."
+                  placeholder="Search..."
                   className="w-full px-6 py-3 border border-[#DEE2E6] rounded-full text-[#495057] placeholder-[#6C757D] 
                            focus:outline-none focus:ring-2 focus:ring-[#007BFF] focus:border-transparent
                            transition-all duration-300 text-base"
