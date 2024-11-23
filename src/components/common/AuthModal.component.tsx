@@ -127,7 +127,7 @@ const AuthModal: React.FC<AuthModalProps> = ({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[800px] bg-white font-['Roboto'] p-6 overflow-y-auto max-h-[90vh] custom-scrollbar">
+      <DialogContent className="sm:max-w-[400px] bg-white font-['Roboto'] p-6">
         <DialogHeader>
           <DialogTitle className="text-[#212529] text-2xl font-semibold text-center">
             {type === 'signup' ? 'Create an Account' : 'Welcome Back'}
@@ -200,52 +200,50 @@ const AuthModal: React.FC<AuthModalProps> = ({
           {/* Email Sign Up Form */}
           {type === 'signup' ? (
             <Form {...signUpForm}>
-              <form onSubmit={signUpForm.handleSubmit(handleEmailSignUp)} className="space-y-6">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  <FormField
-                    control={signUpForm.control}
-                    name="username"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="text-[#212529] font-medium">Username</FormLabel>
-                        <FormControl>
-                          <Input
-                            placeholder="Enter username"
-                            className="border-[#DEE2E6] focus:border-[#007BFF] focus:ring-[#007BFF]"
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormMessage className="text-[#DC3545]" />
-                      </FormItem>
-                    )}
-                  />
+              <form onSubmit={signUpForm.handleSubmit(handleEmailSignUp)} className="space-y-3">
+                <FormField
+                  control={signUpForm.control}
+                  name="username"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-[#212529]">Username</FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder="Enter username"
+                          className="border-[#DEE2E6] focus:border-[#007BFF] focus:ring-[#007BFF]"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage className="text-[#DC3545]" />
+                    </FormItem>
+                  )}
+                />
 
-                  <FormField
-                    control={signUpForm.control}
-                    name="email"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="text-[#212529] font-medium">Email</FormLabel>
-                        <FormControl>
-                          <Input
-                            type="email"
-                            placeholder="Enter email"
-                            className="border-[#DEE2E6] focus:border-[#007BFF] focus:ring-[#007BFF]"
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormMessage className="text-[#DC3545]" />
-                      </FormItem>
-                    )}
-                  />
-                </div>
+                <FormField
+                  control={signUpForm.control}
+                  name="email"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-[#212529]">Email</FormLabel>
+                      <FormControl>
+                        <Input
+                          type="email"
+                          placeholder="Enter email"
+                          className="border-[#DEE2E6] focus:border-[#007BFF] focus:ring-[#007BFF]"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage className="text-[#DC3545]" />
+                    </FormItem>
+                  )}
+                />
 
                 <FormField
                   control={signUpForm.control}
                   name="password"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-[#212529] font-medium">Password</FormLabel>
+                      <FormLabel className="text-[#212529]">Password</FormLabel>
                       <FormControl>
                         <Input
                           type="password"
@@ -264,7 +262,7 @@ const AuthModal: React.FC<AuthModalProps> = ({
                   name="confirmPassword"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-[#212529] font-medium">Confirm Password</FormLabel>
+                      <FormLabel className="text-[#212529]">Confirm Password</FormLabel>
                       <FormControl>
                         <Input
                           type="password"
@@ -291,13 +289,13 @@ const AuthModal: React.FC<AuthModalProps> = ({
           ) : (
             /* Email Login Form */
             <Form {...loginForm}>
-              <form onSubmit={loginForm.handleSubmit(handleEmailLogin)} className="space-y-6">
+              <form onSubmit={loginForm.handleSubmit(handleEmailLogin)} className="space-y-3">
                 <FormField
                   control={loginForm.control}
                   name="email"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-[#212529] font-medium">Email</FormLabel>
+                      <FormLabel className="text-[#212529]">Email</FormLabel>
                       <FormControl>
                         <Input
                           type="email"
@@ -316,7 +314,7 @@ const AuthModal: React.FC<AuthModalProps> = ({
                   name="password"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-[#212529] font-medium">Password</FormLabel>
+                      <FormLabel className="text-[#212529]">Password</FormLabel>
                       <FormControl>
                         <Input
                           type="password"
