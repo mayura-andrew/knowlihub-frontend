@@ -42,7 +42,7 @@ const Comment: React.FC<CommentProps> = ({
   };
 
   return (
-    <div className="relative flex gap-4 p-5 border border-[#DEE2E6] rounded-lg bg-white font-['Inter']">
+    <div className="relative flex gap-4 p-5 border border-[#DEE2E6] rounded-lg bg-white font-['Roboto']">
       {/* Avatar */}
       <div className="flex-shrink-0">
         <img 

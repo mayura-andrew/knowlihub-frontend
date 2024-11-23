@@ -109,7 +109,7 @@ const GlobalLayout: React.FC<GlobalLayoutProps> = ({
             <div className="flex flex-1 mt-20">
                 {/* Left Sidebar */}
                 {!hideLeftSidebar && (
-                    <aside className="w-64 bg-[#F8F9FA] border-r border-[#DEE2E6] overflow-y-auto h-full custom-scrollbar p-3">
+                    <aside className="w-64 bg-[#F8F9FA] border-r border-[#DEE2E6] overflow-y-auto max-h-auto custom-scrollbar p-3">
                         <h3 className="text-lg font-semibold mb-4 text-[#212529] flex items-center">
                             <span className="mr-2">🗂️</span> Categories
                         </h3>

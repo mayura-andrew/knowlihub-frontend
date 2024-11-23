@@ -79,7 +79,7 @@ const ResourceCard: React.FC<{ resource: Resource }> = ({ resource }) => {
             />
           </div>
 
-          <div className="space-y-4 text-center">
+          <div className="space-y-4">
             {/* Title */}
             <h3 className="text-lg font-semibold text-[#212529] leading-tight">
               {resource.title}
