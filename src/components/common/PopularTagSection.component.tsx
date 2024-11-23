@@ -1,4 +1,3 @@
-import React from 'react';
 import { Tag, Hash, TrendingUp } from 'lucide-react';
 
 const PopularTags = () => {

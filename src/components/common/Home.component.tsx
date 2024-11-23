@@ -49,23 +49,6 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Popular Tags */}
-      {/* <section className="bg-[#E3F2FD] rounded-lg shadow-sm p-8">
-        <h2 className="text-xl font-semibold text-[#212529] flex items-center mb-6">
-          <Tag className="w-5 h-5 mr-2 text-[#17A2B8]" />
-          Popular Tags
-        </h2>
-        <div className="flex flex-wrap gap-3">
-          {['React', 'Python', 'JavaScript', 'Machine Learning', 'Web Development', 'Data Science', 'UI/UX'].map((tag) => (
-            <button
-              key={tag}
-              className="px-4 py-2 bg-[#F8F9FA] text-[#495057] rounded-full text-sm font-medium hover:bg-[#007BFF]/10 hover:text-[#007BFF] transition-colors"
-            >
-              #{tag}
-            </button>
-          ))}
-        </div>
-      </section> */}
       <PopularTags />
     </div>
   );
