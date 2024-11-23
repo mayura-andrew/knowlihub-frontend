@@ -50,15 +50,14 @@ interface ShareResourceModalProps {
   onOpenChange: (open: boolean) => void;
 }
 
-
 const ShareResourceModal: React.FC<ShareResourceModalProps> = ({ open, onOpenChange }) => {
-  const [tags, setTags] = React.useState([]);
-  const [prerequisites, setPrerequisites] = React.useState([]);
-  const [newTag, setNewTag] = React.useState('');
-  const [newPrerequisite, setNewPrerequisite] = React.useState('');
+  const [tags, setTags] = React.useState<string[]>([]);
+  const [prerequisites, setPrerequisites] = React.useState<string[]>([]);
+  const [newTag, setNewTag] = React.useState<string>('');
+  const [newPrerequisite, setNewPrerequisite] = React.useState<string>('');
   const [rating, setRating] = React.useState(0);
   const [isFetching, setIsFetching] = React.useState(false);
-  const [fetchError, setFetchError] = React.useState('');
+  const [fetchError, setFetchError] = React.useState<string>('');
 
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -77,7 +76,7 @@ const ShareResourceModal: React.FC<ShareResourceModalProps> = ({ open, onOpenCha
     },
   });
 
-  const fetchResourceMetadata = async (url) => {
+  const fetchResourceMetadata = async (url: string) => {
     if (!url) return;
   
     setIsFetching(true);
@@ -115,15 +114,15 @@ const ShareResourceModal: React.FC<ShareResourceModalProps> = ({ open, onOpenCha
     }
   }, [form.watch('url')]);
 
-  const onSubmit = (values) => {
-    console.log(values);
+  const onSubmit = () => {
+    console.log('submitted', form.getValues());
     onOpenChange(false);
   };
 
   const addTag = () => {
     if (newTag && !tags.includes(newTag)) {
       setTags([...tags, newTag]);
-      form.setValue('tags', [...tags, newTag]);
+      // form.setValue('tags', [...tags, newTag]);
       setNewTag('');
     }
   };
@@ -131,19 +130,21 @@ const ShareResourceModal: React.FC<ShareResourceModalProps> = ({ open, onOpenCha
   const addPrerequisite = () => {
     if (newPrerequisite && !prerequisites.includes(newPrerequisite)) {
       setPrerequisites([...prerequisites, newPrerequisite]);
-      form.setValue('prerequisites', [...prerequisites, newPrerequisite]);
+      // form.setValue('prerequisites', [...prerequisites, newPrerequisite]);
       setNewPrerequisite('');
     }
   };
 
-  const removeTag = (tagToRemove) => {
-    setTags(tags.filter(tag => tag !== tagToRemove));
-    form.setValue('tags', tags.filter(tag => tag !== tagToRemove));
+  const removeTag = (tagToRemove: string) => {
+    const updatedTags = tags.filter(tag => tag !== tagToRemove);
+    setTags(updatedTags);
+    // form.setValue('tags', updatedTags);
   };
 
-  const removePrerequisite = (prereqToRemove) => {
-    setPrerequisites(prerequisites.filter(prereq => prereq !== prereqToRemove));
-    form.setValue('prerequisites', prerequisites.filter(prereq => prereq !== prereqToRemove));
+  const removePrerequisite = (prereqToRemove: string) => {
+    const updatedPrerequisites = prerequisites.filter(prereq => prereq !== prereqToRemove);
+    setPrerequisites(updatedPrerequisites);
+    // form.setValue('prerequisites', updatedPrerequisites);
   };
 
   return (
