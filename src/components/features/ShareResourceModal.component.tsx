@@ -43,6 +43,7 @@ const formSchema = z.object({
   recommendedLevel: z.enum(['beginner', 'intermediate', 'advanced']),
   generalThoughts: z.string().optional(),
   imageUrl: z.string().optional(),
+  platform: z.string().optional(),
 });
 
 interface ShareResourceModalProps {
@@ -73,6 +74,7 @@ const ShareResourceModal: React.FC<ShareResourceModalProps> = ({ open, onOpenCha
       recommendedLevel: 'beginner',
       generalThoughts: '',
       imageUrl: '',
+      platform: '',
     },
   });
 
@@ -99,6 +101,15 @@ const ShareResourceModal: React.FC<ShareResourceModalProps> = ({ open, onOpenCha
       form.setValue('title', metadata.title);
       form.setValue('description', metadata.description);
       form.setValue('imageUrl', metadata.image);
+
+      let platform = 'Website';
+
+      if (url.includes('youtube.com') || url.includes('youtu.be')) {
+        platform = 'YouTube';
+      } else if (url.includes('github.com')) {
+        platform = 'GitHub';
+      } 
+      form.setValue('platform', platform);
     } catch (error) {
       setFetchError('Failed to fetch resource details. You can enter them manually.');
       console.error('Failed to fetch resource details', error);
@@ -232,7 +243,27 @@ const ShareResourceModal: React.FC<ShareResourceModalProps> = ({ open, onOpenCha
                     </FormItem>
                   )}
                 />
+              
+                <FormField
+                  control={form.control}
+                  name="platform"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-[#212529] font-medium">Platform</FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder="Platform"
+                          className="border-[#DEE2E6] focus:border-[#007BFF] focus:ring-[#007BFF]"
+                          {...field}
+                          disabled
+                        />
+                      </FormControl>
+                      <FormMessage className="text-[#DC3545]" />
+                    </FormItem>
+                  )}
+                />
               </div>
+
 
               {/* Right Column */}
               <div className="space-y-4">

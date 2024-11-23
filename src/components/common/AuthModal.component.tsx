@@ -22,6 +22,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import VerificationMessage from './VerificationMesage.component';
+import ProfileSetupModal from './ProfileSetupModal.component';
 
 // Sign Up Form Schema
 const signUpSchema = z.object({
@@ -63,6 +64,7 @@ const AuthModal: React.FC<AuthModalProps> = ({
   const [isLoading, setIsLoading] = React.useState(false);
   const [socialLoading, setSocialLoading] = React.useState<'google' | 'github' | null>(null);
   const [verificationMessageOpen, setVerificationMessageOpen] = React.useState(false);
+  const [profileSetupOpen, setProfileSetupOpen] = React.useState(false);
 
 
   const signUpForm = useForm<z.infer<typeof signUpSchema>>({
@@ -107,6 +109,7 @@ const AuthModal: React.FC<AuthModalProps> = ({
       await new Promise(resolve => setTimeout(resolve, 1500)); // Simulate API call
       onSuccess?.();
       onOpenChange(false);
+      setProfileSetupOpen(true);
     } catch (error) {
       console.error('Login error:', error);
     } finally {
@@ -343,7 +346,13 @@ const AuthModal: React.FC<AuthModalProps> = ({
         </DialogFooter>
       </DialogContent>
     </Dialog>
-    <VerificationMessage open={verificationMessageOpen} onClose={() => setVerificationMessageOpen(false)} /></>
+    <VerificationMessage open={verificationMessageOpen} onClose={() => setVerificationMessageOpen(false)} />
+
+    <ProfileSetupModal open={profileSetupOpen} onClose={() => setProfileSetupOpen(false)} />
+      
+    </>
+
+
 
   );
 };
