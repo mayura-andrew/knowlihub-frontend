@@ -58,7 +58,7 @@ const Navbar: React.FC<NavbarProps> = ({
                 <span className="ml-2 text-2xl font-semibold text-[#212529] group-hover:text-[#007BFF] transition-colors">
                   Knowlihub
                 </span>
-                <span className="ml-2 px-1 py-1 text-xs font-thin text-black bg-[#f8f8f8] rounded-full">
+                <span className="items-center px-1 py-1 text-xs font-thin text-black italic rounded-full">
                 Experiment
                 </span>
               </Link>
