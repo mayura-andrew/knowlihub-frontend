@@ -5,6 +5,7 @@ import TestimonialsAndCTA from './TestimonialsAndCTA.component';
 import WelcomeSection from './WelcomeSection.component';
 import PopularTags from './PopularTagSection.component';
 import TopResourceCards from './TopResources.component';
+import ProfileFeaturesSection from './ProfileFeatures.component';
 
 const HomePage = () => {
   // This would normally come from your auth context/provider
@@ -98,6 +99,8 @@ const HomePage = () => {
       <TopResourceCards />
 
       <FeaturesSection />
+
+      <ProfileFeaturesSection />
 
       {/* Trending Resources Preview */}
       <section className="bg-[#F8F9FA] rounded-lg p-8">
