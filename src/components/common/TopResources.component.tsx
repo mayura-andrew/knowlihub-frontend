@@ -8,7 +8,7 @@ const ResourceCards: React.FC = () => {
       description: "Deep Learning, Neural Networks, Computer Vision, and Natural Language Processing",
       icon: Brain,
       color: "#007BFF",
-      courses: 245,
+      courses: 50,
       bgPattern: "bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMSIgZmlsbD0iIzAwN0JGRiIgZmlsbC1vcGFjaXR5PSIwLjEiLz48L3N2Zz4=')]",
       extraClasses: "before:absolute before:inset-0 before:bg-gradient-to-br before:from-blue-50 before:to-indigo-50 before:opacity-90"
     },
@@ -17,7 +17,7 @@ const ResourceCards: React.FC = () => {
       description: "Linear Algebra, Calculus, Statistics, and Probability Theory",
       icon: Calculator,
       color: "#28A745",
-      courses: 189,
+      courses: 50,
       bgPattern: "bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTMwIDMwbDMwIDMwTTMwIDMwTDAgNjBNMzAgMzBMMzAgME0zMCAzMEwwIDAiIHN0cm9rZT0iIzI4QTc0NSIgc3Ryb2tlLW9wYWNpdHk9IjAuMSIgc3Ryb2tlLXdpZHRoPSIwLjUiLz48L3N2Zz4=')]",
       extraClasses: "before:absolute before:inset-0 before:bg-gradient-to-br before:from-green-50 before:to-emerald-50 before:opacity-90"
     },
@@ -26,7 +26,7 @@ const ResourceCards: React.FC = () => {
       description: "Algorithms, Data Structures, Operating Systems, and Software Engineering",
       icon: Terminal,
       color: "#17A2B8",
-      courses: 312,
+      courses: 50,
       bgPattern: "bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjIiIGhlaWdodD0iMiIgZmlsbD0iIzE3QTJCOCIgZmlsbC1vcGFjaXR5PSIwLjEiLz48L3N2Zz4=')]",
       extraClasses: "before:absolute before:inset-0 before:bg-gradient-to-br before:from-cyan-50 before:to-sky-50 before:opacity-90"
     },
@@ -35,7 +35,7 @@ const ResourceCards: React.FC = () => {
       description: "Network Security, Cryptography, Ethical Hacking, and Security Analysis",
       icon: Shield,
       color: "#DC3545",
-      courses: 156,
+      courses: 50,
       bgPattern: "bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTIwIDIwaDIwdjIwSDIwek0wIDBoMjB2MjBIMHoiIGZpbGw9IiNEQzM1NDUiIGZpbGwtb3BhY2l0eT0iMC4xIi8+PC9zdmc+')]",
       extraClasses: "before:absolute before:inset-0 before:bg-gradient-to-br before:from-red-50 before:to-rose-50 before:opacity-90"
     },
@@ -44,7 +44,7 @@ const ResourceCards: React.FC = () => {
       description: "Quantum Mechanics, Relativity, Thermodynamics, and Classical Mechanics",
       icon: Atom,
       color: "#FFC107",
-      courses: 178,
+      courses: 50,
       bgPattern: "bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0ZGQzEwNyIgc3Ryb2tlLW9wYWNpdHk9IjAuMSIvPjwvc3ZnPg==')]",
       extraClasses: "before:absolute before:inset-0 before:bg-gradient-to-br before:from-yellow-50 before:to-amber-50 before:opacity-90"
     },
@@ -53,7 +53,7 @@ const ResourceCards: React.FC = () => {
       description: "Data Analysis, Big Data, Data Visualization, and Statistical Computing",
       icon: Database,
       color: "#6C757D",
-      courses: 234,
+      courses: 50,
       bgPattern: "bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTAgMGg0MHY0MEgweiIgc3Ryb2tlPSIjNkM3NTdEIiBzdHJva2Utb3BhY2l0eT0iMC4xIiBmaWxsPSJub25lIiBzdHJva2UtZGFzaGFycmF5PSI0IDQiLz48L3N2Zz4=')]",
       extraClasses: "before:absolute before:inset-0 before:bg-gradient-to-br before:from-gray-50 before:to-slate-50 before:opacity-90"
     }
@@ -113,7 +113,7 @@ const ResourceCards: React.FC = () => {
               <div className="flex items-center space-x-6 pt-6 border-t border-gray-100">
                 <div>
                   <p className="font-['Roboto'] font-bold text-[#212529]">{resource.courses}</p>
-                  <p className="font-['Open_Sans'] text-sm text-[#6C757D]">Courses</p>
+                  <p className="font-['Open_Sans'] text-sm text-[#6C757D]">+Courses</p>
                 </div>
 
                 <button 
