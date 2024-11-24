@@ -1,19 +1,27 @@
 import { 
   BookmarkPlus, 
   Share2, 
-  UserCircle, 
   Trophy,
   Target,
   Globe,
   BookOpen,
-  Brain
+  Brain,
+  Settings2
 } from 'lucide-react';
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 
-const ProfileFeaturesSection = () => {
+const PlatformFeaturesSection = () => {
   return (
-    <section className="bg-gradient-to-br from-[#F8F9FA] to-white py-4 rounded-lg">
+    <section className="relative bg-gradient-to-br from-[#F8F9FA] to-white py-4 rounded-lg">
+
+            {/* Background Pattern */}
+      <div className="absolute inset-0 opacity-20">
+        <div className="absolute inset-0" style={{
+          backgroundImage: 'radial-gradient(circle at 1px 1px, #007BFF 1px, transparent 0)',
+          backgroundSize: '40px 40px'
+        }}/>
+      </div>
       {/* Browser Extension Highlight */}
       <div className="max-w-7xl mx-auto px-4 mb-20">
         <div className="flex flex-col md:flex-row items-center gap-12">
@@ -22,7 +30,7 @@ const ProfileFeaturesSection = () => {
               <BookmarkPlus className="w-4 h-4" />
               <span className="text-sm font-semibold">Browser Extension</span>
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-[#212529] mb-6">
+            <h2 className="text-4xl md:text-5xl font-bold text-[#212529] mb-6">
               Save Learning Resources<br />from Anywhere on the Web
             </h2>
             <p className="text-lg text-[#495057] mb-8">
@@ -74,10 +82,10 @@ const ProfileFeaturesSection = () => {
       <div className="max-w-7xl mx-auto px-4">
         <div className="text-center mb-16">
           <div className="inline-flex items-center justify-center space-x-2 bg-blue-600 text-white px-6 py-2 rounded-full mb-6">
-            <UserCircle className="w-4 h-4" />
-            <span className="text-sm font-semibold">Profile Features</span>
+            <Settings2 className="w-4 h-4" />
+            <span className="text-sm font-semibold">Platform Features</span>
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold text-[#212529] mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-[#212529] mb-6">
             Your Learning Journey, Personalized
           </h2>
           <p className="text-[#495057] max-w-2xl mx-auto">
@@ -130,4 +138,4 @@ const ProfileFeaturesSection = () => {
   );
 };
 
-export default ProfileFeaturesSection;
+export default PlatformFeaturesSection;

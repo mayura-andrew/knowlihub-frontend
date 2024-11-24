@@ -5,7 +5,9 @@ import TestimonialsAndCTA from './TestimonialsAndCTA.component';
 import WelcomeSection from './WelcomeSection.component';
 import PopularTags from './PopularTagSection.component';
 import TopResourceCards from './TopResources.component';
-import ProfileFeaturesSection from './ProfileFeatures.component';
+import ContributionSteps from './HowThisWorks';
+import PlatformFeaturesSection from './PlatformFeatures.component';
+import HelpCenter from './HelpCenter.component';
 
 const HomePage = () => {
   // This would normally come from your auth context/provider
@@ -65,10 +67,10 @@ const HomePage = () => {
           {/* Content */}
           <div className="max-w-3xl mx-auto">
             <h1 className="text-4xl lg:text-5xl font-bold mb-6 leading-tight">
-              Discover the Best Resources to Accelerate Your Learning Journey!
+              Share Knowledge, Grow Together
             </h1>
-            <p className="text-lg opacity-90 mb-8">
-              Access curated content, connect with learners, and build your skills in one place.
+            <p className="font-['Open_Sans'] text-lg mb-8 opacity-90 max-w-2xl mx-auto">
+            Unlock the power of community learning! Share your favorite free resources with others and help create a collaborative ecosystem of knowledge.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button className="bg-white text-[#007BFF] px-6 py-3 rounded-full font-medium hover:bg-opacity-90 transition-all flex items-center justify-center">
@@ -96,18 +98,20 @@ const HomePage = () => {
         <div className="absolute inset-0 bg-gradient-to-t from-[#007BFF]/20 to-transparent pointer-events-none" />
       </section>
   
-      <TopResourceCards />
 
       <FeaturesSection />
 
-      <ProfileFeaturesSection />
+      <ContributionSteps />
+      <TopResourceCards />
+
+      <PlatformFeaturesSection />
 
       {/* Trending Resources Preview */}
       <section className="bg-[#F8F9FA] rounded-lg p-8">
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-2xl font-bold text-[#212529] flex items-center">
             <TrendingUp className="w-6 h-6 mr-2 text-[#007BFF]" />
-            Trending Resources
+            Trending Learning Resources
           </h2>
         </div>
         <div className="grid gap-4">
@@ -121,6 +125,8 @@ const HomePage = () => {
       </section>
 
       <TestimonialsAndCTA />
+
+      <HelpCenter />
     </div>
   );
 

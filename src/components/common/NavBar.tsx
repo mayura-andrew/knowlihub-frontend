@@ -21,7 +21,6 @@ const Navbar: React.FC<NavbarProps> = ({
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [shareModalOpen, setShareModalOpen] = useState(false);
   const [authModalOpen, setAuthModalOpen] = useState(false);
-  const [authType, setAuthType] = useState<'login' | 'signup'>('login');
 
 
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
@@ -39,9 +38,6 @@ const Navbar: React.FC<NavbarProps> = ({
     // Handle additional success logic here, e.g., fetching user data
   };
 
-  const handleSwitchMode = () => {
-    setAuthType((prevType) => (prevType === 'login' ? 'signup' : 'login'));
-  };
 
   return (
     <>
@@ -162,9 +158,8 @@ const Navbar: React.FC<NavbarProps> = ({
       <AuthModal 
         open={authModalOpen} 
         onOpenChange={() => setAuthModalOpen(false)} 
-        type={authType}
-        onSwitchMode={handleSwitchMode}
         onSuccess={handleAuthSuccess}
+        
       />
     </>
   );

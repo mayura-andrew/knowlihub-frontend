@@ -5,7 +5,7 @@ const ResourceCards: React.FC = () => {
   const resources = [
     {
       title: "Machine Learning",
-      description: "Deep Learning, Neural Networks, Computer Vision, and Natural Language Processing",
+      description: "Deep Learning, Neural Networks, Computer Vision, NLP",
       icon: Brain,
       color: "#007BFF",
       courses: 50,
@@ -14,7 +14,7 @@ const ResourceCards: React.FC = () => {
     },
     {
       title: "Mathematics",
-      description: "Linear Algebra, Calculus, Statistics, and Probability Theory",
+      description: "Linear Algebra, Calculus, Statistics, Probability, Trigonometry",
       icon: Calculator,
       color: "#28A745",
       courses: 50,
@@ -22,8 +22,8 @@ const ResourceCards: React.FC = () => {
       extraClasses: "before:absolute before:inset-0 before:bg-gradient-to-br before:from-green-50 before:to-emerald-50 before:opacity-90"
     },
     {
-      title: "Computer Science",
-      description: "Algorithms, Data Structures, Operating Systems, and Software Engineering",
+      title: "Programming",
+      description: "Algorithms, Data Structures, Software Engineering, Web Development",
       icon: Terminal,
       color: "#17A2B8",
       courses: 50,
@@ -32,7 +32,7 @@ const ResourceCards: React.FC = () => {
     },
     {
       title: "Cyber Security",
-      description: "Network Security, Cryptography, Ethical Hacking, and Security Analysis",
+      description: "Network Security, Cryptography, Hacking, Analysis",
       icon: Shield,
       color: "#DC3545",
       courses: 50,
@@ -41,7 +41,7 @@ const ResourceCards: React.FC = () => {
     },
     {
       title: "Physics",
-      description: "Quantum Mechanics, Relativity, Thermodynamics, and Classical Mechanics",
+      description: "Quantum Mechanics, Relativity, Thermodynamics",
       icon: Atom,
       color: "#FFC107",
       courses: 50,
@@ -50,7 +50,7 @@ const ResourceCards: React.FC = () => {
     },
     {
       title: "Data Science",
-      description: "Data Analysis, Big Data, Data Visualization, and Statistical Computing",
+      description: "Data Analysis, Big Data, Visualization, Computing",
       icon: Database,
       color: "#6C757D",
       courses: 50,
@@ -60,14 +60,22 @@ const ResourceCards: React.FC = () => {
   ];
 
   return (
-    <div className="p-8 bg-gradient-to-br from-white to-gray-50 rounded-lg">
+    <div className="relative p-8 bg-gradient-to-br from-white to-gray-50 rounded-lg">
+
+    {/* Background Pattern */}
+      <div className="absolute inset-0 opacity-20">
+        <div className="absolute inset-0" style={{
+          backgroundImage: 'radial-gradient(circle at 1px 1px, #007BFF 1px, transparent 0)',
+          backgroundSize: '40px 40px'
+        }}/>
+      </div>
       {/* Section Header */}
       <div className="text-center mb-12 relative">
         <div className="inline-flex items-center justify-center space-x-2 bg-[#007BFF] text-white px-6 py-2 rounded-full mb-6">
           <BookOpen className="w-4 h-4" />
           <span className="text-sm font-semibold">Learning Resources</span>
         </div>
-        <h2 className="text-3xl md:text-4xl font-bold text-[#212529] mb-4">
+        <h2 className="text-4xl md:text-5xl font-bold text-[#212529] mb-6">
           Explore Our Fields of Study
         </h2>
         <p className="font-['Open_Sans'] text-[#495057] max-w-2xl mx-auto">
@@ -113,7 +121,7 @@ const ResourceCards: React.FC = () => {
               <div className="flex items-center space-x-6 pt-6 border-t border-gray-100">
                 <div>
                   <p className="font-['Roboto'] font-bold text-[#212529]">{resource.courses}</p>
-                  <p className="font-['Open_Sans'] text-sm text-[#6C757D]">+Courses</p>
+                  <p className="font-['Open_Sans'] text-sm text-[#6C757D]">+Resources</p>
                 </div>
 
                 <button 

@@ -27,7 +27,7 @@ const TestimonialsAndCTA = () => {
           <MessageSquare className="w-4 h-4" />
           <span className="text-sm font-semibold">User Testimonials</span>
         </div>
-        <h2 className="text-3xl md:text-4xl font-bold text-[#212529] mb-4">
+        <h2 className="text-4xl md:text-5xl font-bold text-[#212529] mb-6">
         What Our Users Are Saying
         </h2>
         <p className="font-['Open_Sans'] text-[#495057] max-w-2xl mx-auto">
@@ -139,11 +139,11 @@ const TestimonialsAndCTA = () => {
 
         <div className="relative p-8 md:p-12">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="font-['Roboto'] text-3xl md:text-4xl font-bold mb-6 leading-tight">
+            <h2 className="font-['Roboto'] text-4xl md:text-5xl font-bold mb-6 leading-tight">
               Join Thousands of Learners Today!
             </h2>
             <p className="font-['Open_Sans'] text-lg mb-8 opacity-90 max-w-2xl mx-auto">
-              Start your learning journey now and get access to thousands of curated resources.
+            Help us build the largest community-driven library of free learning resources.
             </p>
             <button className="group bg-white text-[#007BFF] px-8 py-4 rounded-full font-medium hover:bg-opacity-90 transition-all inline-flex items-center shadow-lg hover:shadow-xl">
               <Rocket className="w-5 h-5 mr-2 group-hover:rotate-12 transition-transform duration-300" />
