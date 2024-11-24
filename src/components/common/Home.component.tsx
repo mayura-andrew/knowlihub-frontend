@@ -4,6 +4,7 @@ import FeaturesSection from './Features.component';
 import TestimonialsAndCTA from './TestimonialsAndCTA.component';
 import WelcomeSection from './WelcomeSection.component';
 import PopularTags from './PopularTagSection.component';
+import TopResourceCards from './TopResources.component';
 
 const HomePage = () => {
   // This would normally come from your auth context/provider
@@ -82,7 +83,7 @@ const HomePage = () => {
           {/* Floating Elements */}
          
           <div className="absolute bottom-8 left-8 bg-white/20 backdrop-blur-sm rounded-lg p-4 animate-float-delay hidden md:block">
-            <div className="w-10 h-10 bg-white/90 rounded-lg shadow-lg" />
+            <div className="w-6 h-6 bg-white/90 rounded-lg shadow-lg" />
           </div>
         </div>
 
@@ -94,6 +95,7 @@ const HomePage = () => {
         <div className="absolute inset-0 bg-gradient-to-t from-[#007BFF]/20 to-transparent pointer-events-none" />
       </section>
   
+      <TopResourceCards />
 
       <FeaturesSection />
 

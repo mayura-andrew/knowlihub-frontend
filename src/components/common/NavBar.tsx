@@ -43,9 +43,6 @@ const Navbar: React.FC<NavbarProps> = ({
     setAuthType((prevType) => (prevType === 'login' ? 'signup' : 'login'));
   };
 
-
-
-
   return (
     <>
       <nav className="bg-white border-b border-[#DEE2E6] fixed top-0 left-0 right-0 z-50 font-['Roboto']">

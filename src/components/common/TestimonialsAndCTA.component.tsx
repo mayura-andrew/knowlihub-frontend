@@ -1,4 +1,4 @@
-import { Rocket, Quote } from 'lucide-react';
+import { Rocket, Quote, MessageSquare } from 'lucide-react';
 
 const TestimonialsAndCTA = () => {
   return (
@@ -19,20 +19,22 @@ const TestimonialsAndCTA = () => {
                }}
           />
         </div>
+          
+        <div className="relative px-4 py-24 -mt-20">
+        {/* Section Header */}
+        <div className="text-center mb-12 relative">
+        <div className="inline-flex items-center justify-center space-x-2 bg-[#007BFF] text-white px-6 py-2 rounded-full mb-6">
+          <MessageSquare className="w-4 h-4" />
+          <span className="text-sm font-semibold">User Testimonials</span>
+        </div>
+        <h2 className="text-3xl md:text-4xl font-bold text-[#212529] mb-4">
+        What Our Users Are Saying
+        </h2>
+        <p className="font-['Open_Sans'] text-[#495057] max-w-2xl mx-auto">
+        Discover how our platform has transformed the learning journey of thousands of users.
+        </p>
+      </div>
 
-        <div className="relative p-8">
-          {/* Section Header with Shimmer */}
-          <div className="text-center mb-12">
-            <div className="relative inline-block">
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer" />
-              <div className="relative bg-[#007BFF] text-white px-6 py-2 rounded-full mb-6 text-sm font-semibold">
-                User Testimonials
-              </div>
-            </div>
-            <h2 className="font-['Roboto'] text-2xl md:text-3xl font-bold text-[#212529]">
-              What Our Users Are Saying
-            </h2>
-          </div>
 
           {/* Testimonials Grid */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
