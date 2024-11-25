@@ -8,11 +8,9 @@ import {
   Share2, 
   Shield,
   Code,
-  GitPullRequest,
   Bug,
   MessageSquare,
   GitFork,
-  Users
 } from 'lucide-react';
 
 interface FAQSectionProps {
@@ -70,7 +68,7 @@ const ContributorGuide = () => {
   const [activeTab, setActiveTab] = useState<ContributionTypeKey>('code');
   
   const contributionTypes: Record<ContributionTypeKey, {
-    icon: React.ComponentType;
+    icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
     title: string;
     description: string;
     steps: string[];
@@ -116,7 +114,7 @@ const ContributorGuide = () => {
         {Object.entries(contributionTypes).map(([key, type]) => (
           <button
             key={key}
-            onClick={() => setActiveTab(key)}
+            onClick={() => setActiveTab(key as ContributionTypeKey)}
             className={`p-4 rounded-lg transition-all duration-300 text-left ${
               activeTab === key 
                 ? 'bg-[#007BFF] text-white shadow-md' 
@@ -308,7 +306,7 @@ const HelpCenter = () => {
 
         {/* New Contributor Overview Section */}
         <div className="mb-12 text-center mt-8">
-          <div className="inline-flex items-center justify-center space-x-2 bg-[#28A745] text-white px-6 py-2 rounded-full mb-4">
+          <div className="inline-flex items-center justify-center space-x-2 bg-[#007BFF] text-white px-6 py-2 rounded-full mb-4">
             <GitFork className="w-4 h-4" />
             <span className="text-sm font-semibold">Open Source Project</span>
           </div>
@@ -320,7 +318,7 @@ const HelpCenter = () => {
           </p>
 
           {/* Contribution Stats */}
-          <div className="grid md:grid-cols-3 gap-6 mb-8">
+          {/* <div className="grid md:grid-cols-3 gap-6 mb-8">
             {[
               { icon: Users, label: "Contributors", value: "100+" },
               { icon: GitPullRequest, label: "Pull Requests", value: "500+" },
@@ -332,7 +330,7 @@ const HelpCenter = () => {
                 <div className="text-[#495057]">{stat.label}</div>
               </div>
             ))}
-          </div>
+          </div> */}
 
           {/* Contribution Guide Component */}
           <ContributorGuide />

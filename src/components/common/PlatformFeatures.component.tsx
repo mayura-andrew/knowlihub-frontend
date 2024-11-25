@@ -30,6 +30,9 @@ const PlatformFeaturesSection = () => {
               <BookmarkPlus className="w-4 h-4" />
               <span className="text-sm font-semibold">Browser Extension</span>
             </div>
+            <span className="px-2 py-1 text-xs font-thin text-black italic rounded-full bg-gray-200">
+                Coming Soon
+            </span>
             <h2 className="text-4xl md:text-5xl font-bold text-[#212529] mb-6">
               Save Learning Resources<br />from Anywhere on the Web
             </h2>

@@ -1,5 +1,4 @@
-import { Rocket, TrendingUp, Clock } from 'lucide-react';
-import ResourceList from '../features/ResourceList';
+import { Rocket } from 'lucide-react';
 import FeaturesSection from './Features.component';
 import TestimonialsAndCTA from './TestimonialsAndCTA.component';
 import WelcomeSection from './WelcomeSection.component';
@@ -8,51 +7,21 @@ import TopResourceCards from './TopResources.component';
 import ContributionSteps from './HowThisWorks';
 import PlatformFeaturesSection from './PlatformFeatures.component';
 import HelpCenter from './HelpCenter.component';
+import TrendingResourcesSection from './TrendingResourcesSection.component';
+import LatestResourcesSection from './LatestResourcesSection.component';
+import RecommendedResourcesSection from './RecommendedResourcesSection.component';
 
 const HomePage = () => {
   // This would normally come from your auth context/provider
   const isSignedIn= false // For demo purposes
   const user= ({ name: 'John' }); // Mock user data
 
-  
-
   const SignedInContent = () => (
     <div className="grid grid-cols-1 gap-8 max-w-7xl mx-auto">
-
       <WelcomeSection user={user} />
-
-      {/* Recommended Resources */}
-      <section className="bg-[#F8F9FA] rounded-lg p-8">
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-xl font-semibold text-[#212529] flex items-center">
-            <TrendingUp className="w-5 h-5 mr-2 text-[#007BFF]" />
-            Recommended for You
-          </h2>
-          <button className="text-[#007BFF] hover:underline text-sm">
-            View All
-          </button>
-        </div>
-        <div className="grid gap-6">
-          <ResourceList />
-        </div>
-      </section>
-
-        {/* Latest  Learning Resource Section */}
-    <section className="bg-[#F8F9FA] rounded-lg shadow-sm p-8">
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-xl font-semibold text-[#212529] flex items-center">
-            <Clock className="w-5 h-5 mr-2 text-[#28A745]" />
-            Latest Resources
-          </h2>
-          <button className="text-[#007BFF] hover:underline text-sm">
-            View All
-          </button>
-        </div>
-        <div className="grid gap-4">
-          <ResourceList />
-        </div>
-      </section>
-
+      <RecommendedResourcesSection />
+      <TrendingResourcesSection />
+      <LatestResourcesSection />
       <PopularTags />
     </div>
   );
@@ -100,32 +69,11 @@ const HomePage = () => {
   
 
       <FeaturesSection />
-
       <ContributionSteps />
       <TopResourceCards />
-
+      <TrendingResourcesSection />
       <PlatformFeaturesSection />
-
-      {/* Trending Resources Preview */}
-      <section className="bg-[#F8F9FA] rounded-lg p-8">
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-2xl font-bold text-[#212529] flex items-center">
-            <TrendingUp className="w-6 h-6 mr-2 text-[#007BFF]" />
-            Trending Learning Resources
-          </h2>
-        </div>
-        <div className="grid gap-4">
-          <ResourceList />
-        </div>
-        <div className="mt-6 text-center">
-          <button className="text-[#007BFF] font-medium hover:underline">
-            Sign Up to Access All Resources →
-          </button>
-        </div>
-      </section>
-
       <TestimonialsAndCTA />
-
       <HelpCenter />
     </div>
   );

@@ -20,7 +20,7 @@ const TestimonialsAndCTA = () => {
           />
         </div>
           
-        <div className="relative px-4 py-24 -mt-20">
+        <div className="relative px-4 py-24">
         {/* Section Header */}
         <div className="text-center mb-12 relative">
         <div className="inline-flex items-center justify-center space-x-2 bg-[#007BFF] text-white px-6 py-2 rounded-full mb-6">

@@ -29,7 +29,7 @@ const Navbar: React.FC<NavbarProps> = ({
   };
 
   const openAuthModal = (type: 'login' | 'signup') => {
-    setAuthType(type);
+    console.log('Opening auth modal for:', type);
     setAuthModalOpen(true);
   }
 
