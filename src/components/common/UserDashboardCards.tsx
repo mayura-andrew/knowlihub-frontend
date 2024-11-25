@@ -39,19 +39,20 @@ const UserDashboardCards: React.FC<UserDashboardCardsProps> = ({ navUser, levelI
   return (
     <div className="space-y-4">
       <RankCard 
+        isLoggedIn={false}
         navUser={navUser}
         levelInfo={levelInfo}
         nextLevelInfo={nextLevelInfo}
       />
       <StudyTipsCard tip={studyTip} />
-      <ProgressCard />
-      <StatusOfSubmissionCard activity={activity} />
+      <ProgressCard isLoggedIn={false}/>
+      <StatusOfSubmissionCard activity={activity} isLoggedIn={false} />
       <ActivityCard
       activities={[
         { description: "Completed React Tutorial", time: "2 hours ago" },
         { description: "Saved Python Course", time: "5 hours ago" },
         { description: "Earned 'Quick Learner' badge", time: "1 day ago" },
-      ]}
+      ]} isLoggedIn={false}
     />
     </div>
   );

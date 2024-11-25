@@ -30,7 +30,7 @@ const TestimonialsAndCTA = () => {
         <h2 className="text-4xl md:text-5xl font-bold text-[#212529] mb-6">
         What Our Users Are Saying
         </h2>
-        <p className="font-['Open_Sans'] text-[#495057] max-w-2xl mx-auto">
+        <p className="font-['Open_Sans'] text-[#495057] max-w-2xl mx-auto text-lg">
         Discover how our platform has transformed the learning journey of thousands of users.
         </p>
       </div>

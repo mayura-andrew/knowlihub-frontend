@@ -36,7 +36,7 @@ const PlatformFeaturesSection = () => {
             <h2 className="text-4xl md:text-5xl font-bold text-[#212529] mb-6">
               Save Learning Resources<br />from Anywhere on the Web
             </h2>
-            <p className="text-lg text-[#495057] mb-8">
+            <p className="font-['Open_Sans'] text-[#495057] max-w-2xl mx-auto text-lg">
               Transform any web content into your personal learning material. Our browser extension seamlessly integrates with your learning journey.
             </p>
             <div className="flex flex-wrap gap-4">
@@ -91,7 +91,7 @@ const PlatformFeaturesSection = () => {
           <h2 className="text-4xl md:text-5xl font-bold text-[#212529] mb-6">
             Your Learning Journey, Personalized
           </h2>
-          <p className="text-[#495057] max-w-2xl mx-auto">
+          <p className="font-['Open_Sans'] text-[#495057] max-w-2xl mx-auto text-lg">
             Track your progress, showcase achievements, and connect with fellow learners
           </p>
         </div>

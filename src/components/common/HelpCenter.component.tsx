@@ -263,7 +263,7 @@ const HelpCenter = () => {
           <h2 className="text-4xl md:text-5xl font-bold text-[#212529] mb-4">
             How can we help you?
           </h2>
-          <p className="font-['Open_Sans'] text-lg mb-8 opacity-90 max-w-2xl mx-auto">
+          <p className="font-['Open_Sans'] text-[#495057] max-w-2xl mx-auto text-lg">
             Find answers to frequently asked questions about using Knowlihub
           </p>
         </div>
@@ -313,7 +313,7 @@ const HelpCenter = () => {
           <h2 className="text-3xl font-bold text-[#212529] mb-4">
             Join Our Community of Contributors
           </h2>
-          <p className="text-[#495057] mb-8 max-w-2xl mx-auto">
+          <p className="font-['Open_Sans'] text-[#495057] max-w-2xl mx-auto text-lg">
             Knowlihub is built by the community, for the community. Whether you code, write, design, or organize, there's a place for you in our open-source family.
           </p>
 

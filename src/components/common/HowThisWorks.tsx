@@ -52,7 +52,7 @@ const ContributionSteps = () => {
           <h2 className="text-4xl md:text-5xl font-bold text-[#212529] mb-4">
             Your Journey to Sharing Knowledge
           </h2>
-          <p className="font-['Open_Sans'] text-lg mb-8 opacity-90 max-w-2xl mx-auto">
+          <p className="font-['Open_Sans'] text-[#495057] max-w-2xl mx-auto text-lg">
             Follow these simple steps to contribute and benefit from our community of learners
           </p>
         </div>
