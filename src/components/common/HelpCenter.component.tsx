@@ -243,7 +243,7 @@ const HelpCenter = () => {
   ];
 
   return (
-    <section className="relative bg-gradient-to-br from-gray-50 to-white py-16 overflow-hidden">
+    <section className="relative bg-gradient-to-br from-gray-50 to-white py-16 overflow-hidden" id="help">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-20">
         <div className="absolute inset-0" style={{

@@ -13,36 +13,33 @@ interface NavbarProps {
   onLogout?: () => void;
 }
 
-const Navbar: React.FC<NavbarProps> = ({ 
-  user, 
-  onLogout 
-}) => {
+const Navbar: React.FC<NavbarProps> = ({ user, onLogout }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [shareModalOpen, setShareModalOpen] = useState(false);
   const [authModalOpen, setAuthModalOpen] = useState(false);
-
 
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log('Searching for:', searchQuery);
   };
 
-  const openAuthModal = (type: 'login' | 'signup') => {
-    console.log('Opening auth modal for:', type);
+  const openAuthModal = () => {
     setAuthModalOpen(true);
-  }
-
-  const handleAuthSuccess = () => {
-    setAuthModalOpen(false);
-    // Handle additional success logic here, e.g., fetching user data
   };
 
+  const handleScroll = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>, id: string) => {
+    e.preventDefault();
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   return (
     <>
       <nav className="bg-white border-b border-[#DEE2E6] fixed top-0 left-0 right-0 z-50 font-['Roboto']">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-12xl mx-auto px-1 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
             {/* Logo */}
             <div className="flex items-center">
@@ -52,14 +49,14 @@ const Navbar: React.FC<NavbarProps> = ({
                   Knowlihub
                 </span>
                 <span className="items-center px-1 py-1 text-xs font-thin text-black italic rounded-full">
-                Experiment
+                  Experiment
                 </span>
               </Link>
             </div>
 
             {/* Centered Search Bar */}
-            <div className="flex-grow mx-8">
-              <form onSubmit={handleSearch} className="relative max-w-2xl mx-auto">
+            <div className="flex-grow mx-4">
+              <form onSubmit={handleSearch} className="relative max-w-xl mx-auto">
                 <input
                   type="text"
                   value={searchQuery}
@@ -77,6 +74,18 @@ const Navbar: React.FC<NavbarProps> = ({
                 </button>
               </form>
             </div>
+
+{/* Section Links */}
+<div className="hidden md:flex items-center space-x-4">
+              <a href="#benefits" onClick={(e) => handleScroll(e, 'benefits')} className="text-[#495057] hover:text-[#007BFF] transition-colors">Benefits</a>
+              <a href="#howitworks" onClick={(e) => handleScroll(e, 'howitworks')} className="text-[#495057] hover:text-[#007BFF] transition-colors">How It Works</a>
+              <a href="#explore" onClick={(e) => handleScroll(e, 'explore')} className="text-[#495057] hover:text-[#007BFF] transition-colors">Explore</a>
+              <a href="#trending" onClick={(e) => handleScroll(e, 'trending')} className="text-[#495057] hover:text-[#007BFF] transition-colors">Trending</a>
+              <a href="#features" onClick={(e) => handleScroll(e, 'features')} className="text-[#495057] hover:text-[#007BFF] transition-colors">Features</a>
+              <a href="#testimonials" onClick={(e) => handleScroll(e, 'testimonials')} className="text-[#495057] hover:text-[#007BFF] transition-colors">Testimonials</a>
+              <a href="#help" onClick={(e) => handleScroll(e, 'help')} className="text-[#495057] hover:text-[#007BFF] transition-colors">Help</a>
+            </div>
+
 
             {/* User Profile Section */}
             <div className="flex items-center space-x-4">
@@ -129,20 +138,21 @@ const Navbar: React.FC<NavbarProps> = ({
                   </div>
                 </>
               ) : (
-                <div className="flex items-center space-x-3">
+                <div className="flex items-center space-x-3 ml-6">
+                  {/* <Link to="/login">
                     <Button 
-                      onClick={() => openAuthModal('login')}
                       className="px-6 py-2 rounded-full bg-white text-[#007BFF] border border-[#007BFF] 
                                hover:bg-[#007BFF] hover:text-white transition-all duration-300"
                     >
                       Login
                     </Button>
+                  </Link> */}
                     <Button 
-                      onClick={() => openAuthModal('signup')}
                       className="px-6 py-2 rounded-full bg-[#007BFF] text-white border border-[#007BFF]
                                hover:bg-[#0056b3] transition-all duration-300"
+                               onClick={() => openAuthModal()}
                     >
-                      Sign Up
+                      Login
                     </Button>
                 </div>
               )}
@@ -155,14 +165,9 @@ const Navbar: React.FC<NavbarProps> = ({
       <ShareResourceModal open={shareModalOpen} onOpenChange={() => setShareModalOpen(false)} />
 
       {/* Auth Modal */}
-      <AuthModal 
-        open={authModalOpen} 
-        onOpenChange={() => setAuthModalOpen(false)} 
-        onSuccess={handleAuthSuccess}
-        
-      />
+      <AuthModal open={authModalOpen} onOpenChange={() => setAuthModalOpen(false)} />
     </>
   );
-};
+}
 
 export default Navbar;

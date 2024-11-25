@@ -2,7 +2,7 @@ import { Rocket, Quote, MessageSquare } from 'lucide-react';
 
 const TestimonialsAndCTA = () => {
   return (
-    <div className="space-y-8">
+    <div className="space-y-8" id="testimonials">
       {/* Testimonials Section */}
       <section className="relative bg-gradient-to-br from-[#E3F2FD] to-white rounded-lg shadow-lg overflow-hidden">
         {/* Background Patterns */}

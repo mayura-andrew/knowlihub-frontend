@@ -13,7 +13,7 @@ import { Badge } from "@/components/ui/badge";
 
 const PlatformFeaturesSection = () => {
   return (
-    <section className="relative bg-gradient-to-br from-[#F8F9FA] to-white py-4 rounded-lg">
+    <section className="relative bg-gradient-to-br from-[#F8F9FA] to-white py-4 rounded-lg" id="features">
 
             {/* Background Pattern */}
       <div className="absolute inset-0 opacity-20">

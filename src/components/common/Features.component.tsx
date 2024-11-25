@@ -2,7 +2,7 @@ import { BookOpen, Share2, Users, TrendingUp } from 'lucide-react';
 
 const FeaturesSection = () => {
   return (
-    <section className="relative overflow-hidden">
+    <section className="relative overflow-hidden" id="benefits">
       {/* Background with gradient mesh */}
       <div className="absolute inset-0 opacity-20">
         <div className="absolute inset-0" style={{
