@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Tag, CheckSquare, Square, Sliders, Star, Zap, TrendingUp } from 'lucide-react';
+import { Tag, CheckSquare, Square, Sliders, Star, Zap } from 'lucide-react';
 
 interface Category {
   id: string;
@@ -54,8 +54,8 @@ const CategoriesNavigation: React.FC<CategoriesNavigationProps> = ({
   // Featured categories with enhanced visual design
   const featuredCategories = [
     {
-      id: 'top-recommendations',
-      name: 'Top Recommendations',
+      id: 'editors-pick',
+      name: "Editor's Picks",
       icon: <Star className="text-yellow-500" />,
       gradient: 'from-yellow-100 to-yellow-200',
       borderColor: 'border-yellow-300',
@@ -68,14 +68,6 @@ const CategoriesNavigation: React.FC<CategoriesNavigationProps> = ({
       gradient: 'from-blue-100 to-blue-200',
       borderColor: 'border-blue-300',
       textColor: 'text-blue-800'
-    },
-    {
-      id: 'trending',
-      name: 'Trending',
-      icon: <TrendingUp className="text-red-500" />,
-      gradient: 'from-red-100 to-red-200',
-      borderColor: 'border-red-300',
-      textColor: 'text-red-800'
     }
   ];
 

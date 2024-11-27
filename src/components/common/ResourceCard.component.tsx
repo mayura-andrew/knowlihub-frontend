@@ -13,7 +13,7 @@ const ResourceCard: React.FC<{ resource: Resource }> = ({ resource }) => {
     const fetchImage = async () => {
       if (!resource.imageUrl) {
         try {
-          const response = await fetch(`http://localhost:3001/api/fetchMetaData?url=${encodeURIComponent(resource.url)}`);
+          const response = await fetch(`http://139.59.31.35:3001/api/fetchMetaData?url=${encodeURIComponent(resource.url)}`);
           const metadata = await response.json();
           setImageUrl(metadata.image);
         } catch (error) {
