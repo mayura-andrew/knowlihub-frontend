@@ -1,19 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Search, Plus } from 'lucide-react';
+import { Search, Plus, Users, BookOpen, User } from 'lucide-react';
 import ShareResourceModal from '../features/ShareResourceModal.component';
 import AuthModal from './AuthModal.component';
+import { AuthContext } from '@/context/AuthContext';
 
-interface NavbarProps {
-  user?: {
-    name: string;
-    avatar: string;
-  };
-  onLogout?: () => void;
-}
-
-const Navbar: React.FC<NavbarProps> = ({ user, onLogout }) => {
+const Navbar: React.FC = () => {
+  const { isSignedIn, user, logout } = useContext(AuthContext);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [shareModalOpen, setShareModalOpen] = useState(false);
@@ -76,20 +70,21 @@ const Navbar: React.FC<NavbarProps> = ({ user, onLogout }) => {
             </div>
 
             {/* Section Links */}
-          <div className="hidden md:flex items-center space-x-4">
-              <a href="#benefits" onClick={(e) => handleScroll(e, 'benefits')} className="text-[#495057] hover:text-[#007BFF] transition-colors">Benefits</a>
-              <a href="#howitworks" onClick={(e) => handleScroll(e, 'howitworks')} className="text-[#495057] hover:text-[#007BFF] transition-colors">How It Works</a>
-              <a href="#explore" onClick={(e) => handleScroll(e, 'explore')} className="text-[#495057] hover:text-[#007BFF] transition-colors">Explore</a>
-              <a href="#trending" onClick={(e) => handleScroll(e, 'trending')} className="text-[#495057] hover:text-[#007BFF] transition-colors">Trending</a>
-              <a href="#features" onClick={(e) => handleScroll(e, 'features')} className="text-[#495057] hover:text-[#007BFF] transition-colors">Features</a>
-              <a href="#testimonials" onClick={(e) => handleScroll(e, 'testimonials')} className="text-[#495057] hover:text-[#007BFF] transition-colors">Testimonials</a>
-              <a href="#help" onClick={(e) => handleScroll(e, 'help')} className="text-[#495057] hover:text-[#007BFF] transition-colors">Help</a>
-            </div>
-
+            {!isSignedIn && (
+              <div className="hidden md:flex items-center space-x-4">
+                <a href="#benefits" onClick={(e) => handleScroll(e, 'benefits')} className="text-[#495057] hover:text-[#007BFF] transition-colors">Benefits</a>
+                <a href="#howitworks" onClick={(e) => handleScroll(e, 'howitworks')} className="text-[#495057] hover:text-[#007BFF] transition-colors">How It Works</a>
+                <a href="#explore" onClick={(e) => handleScroll(e, 'explore')} className="text-[#495057] hover:text-[#007BFF] transition-colors">Explore</a>
+                <a href="#trending" onClick={(e) => handleScroll(e, 'trending')} className="text-[#495057] hover:text-[#007BFF] transition-colors">Trending</a>
+                <a href="#features" onClick={(e) => handleScroll(e, 'features')} className="text-[#495057] hover:text-[#007BFF] transition-colors">Features</a>
+                <a href="#testimonials" onClick={(e) => handleScroll(e, 'testimonials')} className="text-[#495057] hover:text-[#007BFF] transition-colors">Testimonials</a>
+                <a href="#help" onClick={(e) => handleScroll(e, 'help')} className="text-[#495057] hover:text-[#007BFF] transition-colors">Help</a>
+              </div>
+            )}
 
             {/* User Profile Section */}
             <div className="flex items-center space-x-4 ml-4">
-              {user ? (
+              {isSignedIn ? (
                 <>
                   <Button
                     onClick={() => setShareModalOpen(true)}
@@ -99,14 +94,26 @@ const Navbar: React.FC<NavbarProps> = ({ user, onLogout }) => {
                     <Plus size={18} />
                     <span>Share Resource</span>
                   </Button>
+                  <Link to="/people" className="text-[#495057] hover:text-[#007BFF] transition-colors flex items-center space-x-2">
+                    <Users size={18} />
+                    <span>People</span>
+                  </Link>
+                  <Link to="/learning-paths" className="text-[#495057] hover:text-[#007BFF] transition-colors flex items-center space-x-2">
+                    <BookOpen size={18} />
+                    <span>Learning Paths</span>
+                  </Link>
+                  <Link to="/profile" className="text-[#495057] hover:text-[#007BFF] transition-colors flex items-center space-x-2">
+                    <User size={18} />
+                    <span>Profile</span>
+                  </Link>
                   <div className="relative">
                     <button 
                       onClick={() => setDropdownOpen(!dropdownOpen)}
                       className="flex items-center space-x-3 focus:outline-none group"
                     >
                       <img 
-                        src={user.avatar} 
-                        alt={user.name} 
+                        src={user?.avatar} 
+                        alt={user?.name} 
                         className="h-10 w-10 rounded-full ring-2 ring-[#007BFF]/10 group-hover:ring-[#007BFF]/30 transition-all"
                       />
                     </button>
@@ -127,7 +134,7 @@ const Navbar: React.FC<NavbarProps> = ({ user, onLogout }) => {
                         </Link>
                         <hr className="my-1 border-[#DEE2E6]" />
                         <button 
-                          onClick={onLogout}
+                          onClick={logout}
                           className="w-full text-left px-4 py-2.5 text-[#DC3545] hover:bg-[#F8F9FA] flex items-center"
                         >
                           <span className="mr-3">🚪</span> Logout
@@ -138,21 +145,13 @@ const Navbar: React.FC<NavbarProps> = ({ user, onLogout }) => {
                 </>
               ) : (
                 <div className="flex items-center space-x-3 ml-6">
-                  {/* <Link to="/login">
-                    <Button 
-                      className="px-6 py-2 rounded-full bg-white text-[#007BFF] border border-[#007BFF] 
-                               hover:bg-[#007BFF] hover:text-white transition-all duration-300"
-                    >
-                      Login
-                    </Button>
-                  </Link> */}
-                    <Button 
-                      className="px-6 py-2 rounded-full bg-[#007BFF] text-white border border-[#007BFF]
-                               hover:bg-[#0056b3] transition-all duration-300"
-                               onClick={() => openAuthModal()}
-                    >
-                      Join Now
-                    </Button>
+                  <Button 
+                    className="px-6 py-2 rounded-full bg-[#007BFF] text-white border border-[#007BFF]
+                             hover:bg-[#0056b3] transition-all duration-300"
+                    onClick={() => openAuthModal()}
+                  >
+                    Join Now
+                  </Button>
                 </div>
               )}
             </div>

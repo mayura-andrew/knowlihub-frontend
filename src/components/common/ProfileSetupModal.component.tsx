@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Upload, Plus, X, Globe, Github, Linkedin, Twitter, Facebook } from 'lucide-react';
 import {
   Dialog,
@@ -6,6 +6,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { AuthContext } from '@/context/AuthContext';
 
 interface ProfileSetupModalProps {
   open: boolean;
@@ -13,6 +14,7 @@ interface ProfileSetupModalProps {
 }
 
 const ProfileSetupModal: React.FC<ProfileSetupModalProps> = ({ open, onClose }) => {
+  const { login } = useContext(AuthContext);
   const [photoPreview, setPhotoPreview] = useState<string | null>(null);
   const [skills, setSkills] = useState<string[]>([]);
   const [newSkill, setNewSkill] = useState<string>('');
@@ -49,6 +51,12 @@ const ProfileSetupModal: React.FC<ProfileSetupModalProps> = ({ open, onClose }) 
       setSkills([...skills, newSkill]);
       setNewSkill('');
     }
+  };
+
+  const handleSaveProfile = () => {
+    // Simulate saving profile and logging in the user
+    login({ name: 'John Doe', avatar: photoPreview });
+    onClose();
   };
 
   return (
@@ -244,7 +252,10 @@ const ProfileSetupModal: React.FC<ProfileSetupModalProps> = ({ open, onClose }) 
             >
               Cancel
             </button>
-            <button className="px-4 py-1.5 text-sm bg-[#007BFF] hover:bg-[#0056b3] text-white rounded-md transition-all">
+            <button 
+              onClick={handleSaveProfile}
+              className="px-4 py-1.5 text-sm bg-[#007BFF] hover:bg-[#0056b3] text-white rounded-md transition-all"
+            >
               Save Profile
             </button>
           </div>

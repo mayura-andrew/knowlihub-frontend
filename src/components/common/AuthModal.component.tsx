@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Github, Loader2 } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
@@ -19,6 +19,7 @@ import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import VerificationMessage from './VerificationMesage.component';
 import ProfileSetupModal from './ProfileSetupModal.component';
+import { AuthContext } from '@/context/AuthContext';
 
 const signUpSchema = z.object({
   username: z.string()
@@ -46,6 +47,7 @@ interface AuthModalProps {
   onSuccess?: () => void;
 }
 const AuthModal: React.FC<AuthModalProps> = ({ open, onOpenChange, onSuccess }) => {
+  const { login, signUp } = useContext(AuthContext);
   const [isLoading, setIsLoading] = React.useState(false);
   const [socialLoading, setSocialLoading] = React.useState<string | null>(null);
   const [verificationMessageOpen, setVerificationMessageOpen] = React.useState(false);
@@ -84,8 +86,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ open, onOpenChange, onSuccess }) 
   const handleEmailSignUp = async (values: AuthFormValues) => {
     setIsLoading(true);
     try {
-      console.log('Sign up values:', values);
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      await signUp(values);
       onSuccess?.();
       onOpenChange(false);
       setVerificationMessageOpen(true);
@@ -100,7 +101,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ open, onOpenChange, onSuccess }) 
     setIsLoading(true);
     try {
       console.log('Login values:', values);
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      await login(values);
       onSuccess?.();
       onOpenChange(false);
       setProfileSetupOpen(true);

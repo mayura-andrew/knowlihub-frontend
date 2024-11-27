@@ -94,7 +94,8 @@ const GlobalLayout: React.FC<GlobalLayoutProps> = ({
             <div className="flex flex-1 mt-20 overflow-hidden">
                 {/* Left Sidebar */}
                 {!hideLeftSidebar && (
-                  <aside className="w-64 bg-[#F8F9FA] border-r border-[#DEE2E6] overflow-y-auto max-h-auto custom-scrollbar p-4 shadow-sm">
+                    <aside className="w-64 bg-[#F8F9FA] border-l border-[#DEE2E6] max-h-[calc(100vh-5rem)] p-4 custom-scrollbar shadow-sm">
+
                     <CategoriesNavigation
                       categories={categories}
                       selectedCategories={selectedCategories}
@@ -123,10 +124,9 @@ const GlobalLayout: React.FC<GlobalLayoutProps> = ({
 
                 {/* Right Sidebar */}
                 {!hideRightSidebar && (
-                    <aside className="w-64 bg-[#F8F9FA] border-l border-[#DEE2E6] overflow-y-auto max-h-[100vh-5rem] custom-scrollbar p-1">
+          <aside className="w-64 bg-[#F8F9FA] border-l border-[#DEE2E6] max-h-[calc(100vh-5rem)] overflow-y-auto custom-scrollbar p-4 shadow-sm">
                         {/* User Dashboard Cards */}
                         <UserDashboardCards
-                            isLoggedIn={false}
                             navUser={userData.navUser}
                             levelInfo={userData.levelInfo}
                             nextLevelInfo={userData.nextLevelInfo}

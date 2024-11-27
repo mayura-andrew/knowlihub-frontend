@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import RankCard from './RankCard.component';
 import StatusOfSubmissionCard from './StatusOfSubmission.component';
 import ActivityCard from './RecentActivitiesCard.component';
@@ -6,9 +6,9 @@ import ProgressCard from './ProgressCard.component';
 import StudyTipsCard from './StudyTips.component';
 import AuthorInfo from './AuthorInfo.component'; // Import the AuthorInfo component
 import { Link } from 'react-router-dom';
+import { AuthContext } from '@/context/AuthContext';
 
 interface UserDashboardCardsProps {
-  isLoggedIn: boolean;
   navUser?: {
     name: string;
     avatar: string;
@@ -43,10 +43,12 @@ interface UserDashboardCardsProps {
   }[];
 }
 
-const UserDashboardCards: React.FC<UserDashboardCardsProps> = ({ isLoggedIn, navUser, levelInfo, nextLevelInfo, activity, studyTip, featuredUsers }) => {
+const UserDashboardCards: React.FC<UserDashboardCardsProps> = ({ navUser, levelInfo, nextLevelInfo, activity, studyTip, featuredUsers }) => {
+  const { isSignedIn } = useContext(AuthContext);
+
   return (
     <div className="space-y-4">
-      {isLoggedIn && (
+      {isSignedIn && (
         <>
           <RankCard 
             isLoggedIn={true}
@@ -68,8 +70,7 @@ const UserDashboardCards: React.FC<UserDashboardCardsProps> = ({ isLoggedIn, nav
       )}
 
       {/* Top Contributors Section */}
-      <div className="border-t border-[#DEE2E6] my-6" />
-      <div className="mb-6">
+      <div className="mb-6 p-6">
         <h3 className="text-md font-semibold text-[#212529] flex items-center justify-center mb-4">
           <span className="mr-2">👤</span> Top Contributors
         </h3>
