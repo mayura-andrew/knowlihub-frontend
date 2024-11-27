@@ -2,7 +2,7 @@ import React, { createContext, useState } from 'react';
 
 interface User {
   name: string;
-  email: string;
+  email?: string;
   avatar?: string;
  rank?: number;
     level?: number;
@@ -12,7 +12,7 @@ interface User {
 interface AuthContextProps {
   isSignedIn: boolean;
   user: User | null;
-  login: (values: { email: string; password: string }) => Promise<void>;
+  login: (values: { name?: string; email: string; password: string; avatar?: string | null }) => Promise<void>;
   signUp: (values: { username: string; email: string; password: string; confirmPassword: string }) => Promise<void>;
   logout: () => void;
 }

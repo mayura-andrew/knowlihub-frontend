@@ -55,7 +55,7 @@ const ProfileSetupModal: React.FC<ProfileSetupModalProps> = ({ open, onClose }) 
 
   const handleSaveProfile = () => {
     // Simulate saving profile and logging in the user
-    login({ name: 'John Doe', avatar: photoPreview });
+    login({ name: 'John Doe', avatar: photoPreview, email: 'john@gmail.com', password: 'password' });
     onClose();
   };
 
