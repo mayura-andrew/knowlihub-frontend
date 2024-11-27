@@ -102,6 +102,8 @@ const ShareResourceModal: React.FC<ShareResourceModalProps> = ({ open, onOpenCha
       form.setValue('description', metadata.description);
       form.setValue('imageUrl', metadata.image);
 
+      console.log(metadata)
+
       let platform = 'Website';
 
       if (url.includes('youtube.com') || url.includes('youtu.be')) {

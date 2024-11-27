@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Tag, CheckSquare, Square, Sliders, Star, Zap } from 'lucide-react';
+import { Tag, Star, Zap, X } from 'lucide-react';
 
 interface Category {
   id: string;
@@ -20,35 +20,26 @@ const CategoriesNavigation: React.FC<CategoriesNavigationProps> = ({
   onCategoryChange
 }) => {
   const [filteredCategories, setFilteredCategories] = useState<Category[]>(categories);
-  const [selectMode, setSelectMode] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
 
   // Filter categories based on search term
   useEffect(() => {
-    setFilteredCategories(categories);
-  }, [categories]);
+    const filtered = categories.filter(category => 
+      category.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setFilteredCategories(filtered);
+  }, [searchTerm, categories]);
 
   // Category selection handler
   const handleCategoryToggle = (category: Category) => {
     onCategoryChange(category);
   };
 
-  // Select all or deselect all categories
-  const toggleSelectAll = () => {
-    if (selectedCategories.length === categories.length) {
-      // Deselect all
-      categories.forEach(category => {
-        if (selectedCategories.some((c) => c.id === category.id)) {
-          onCategoryChange(category);
-        }
-      });
-    } else {
-      // Select all
-      categories.forEach(category => {
-        if (!selectedCategories.some((c) => c.id === category.id)) {
-          onCategoryChange(category);
-        }
-      });
-    }
+  // Clear all selected categories
+  const clearAll = () => {
+    selectedCategories.forEach(category => {
+      onCategoryChange(category);
+    });
   };
 
   // Featured categories with enhanced visual design
@@ -113,33 +104,23 @@ const CategoriesNavigation: React.FC<CategoriesNavigationProps> = ({
           ))}
         </div>
 
-        {/* Bulk Actions */}
-        <div className="flex justify-between items-center">
-          <button 
-            onClick={toggleSelectAll}
-            className="flex items-center text-[#007BFF] hover:bg-[#007BFF]/10 
-            px-3 py-1 rounded-md transition-colors"
-          >
-            {selectedCategories.length === categories.length ? (
-              <>
-                <CheckSquare className="mr-2" size={16} />
-                Deselect All
-              </>
-            ) : (
-              <>
-                <Square className="mr-2" size={16} />
-                Select All
-              </>
-            )}
-          </button>
-          <button 
-            onClick={() => setSelectMode(!selectMode)}
-            className="flex items-center text-[#495057] hover:bg-gray-100 
-            px-3 py-1 rounded-md transition-colors"
-          >
-            <Sliders className="mr-2" size={16} />
-            {selectMode ? 'Exit' : 'Bulk Select'}
-          </button>
+        {/* Search Bar */}
+        <div className="relative">
+          <input
+            type="text"
+            placeholder="Search categories..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="w-full p-2 text-sm border border-[#DEE2E6] rounded-md focus:ring-1 focus:ring-[#007BFF] focus:border-[#007BFF] transition-all"
+          />
+          {searchTerm && (
+            <button 
+              onClick={() => setSearchTerm('')}
+              className="absolute right-2 top-1/2 transform -translate-y-1/2 text-[#6C757D] hover:text-[#212529] transition-colors"
+            >
+              <X size={16} />
+            </button>
+          )}
         </div>
 
         {/* Category List */}
@@ -171,6 +152,20 @@ const CategoriesNavigation: React.FC<CategoriesNavigationProps> = ({
             </div>
           ))}
         </div>
+
+        {/* Clear All Button */}
+        {selectedCategories.length > 0 && (
+          <div className="flex justify-end">
+            <button 
+              onClick={clearAll}
+              className="flex items-center text-[#DC3545] hover:bg-[#DC3545]/10 
+              px-3 py-1 rounded-md transition-colors"
+            >
+              <X className="mr-2" size={16} />
+              Clear All
+            </button>
+          </div>
+        )}
 
         {/* Empty State */}
         {filteredCategories.length === 0 && (
