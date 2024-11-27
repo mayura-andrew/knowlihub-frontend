@@ -49,7 +49,7 @@ const Navbar: React.FC<NavbarProps> = ({ user, onLogout }) => {
                   Knowlihub
                 </span>
                 <span className="items-center px-1 py-1 text-xs font-thin text-black italic rounded-full">
-                  Experiment
+                  Experimental
                 </span>
               </Link>
             </div>
@@ -75,8 +75,8 @@ const Navbar: React.FC<NavbarProps> = ({ user, onLogout }) => {
               </form>
             </div>
 
-{/* Section Links */}
-<div className="hidden md:flex items-center space-x-4">
+            {/* Section Links */}
+          <div className="hidden md:flex items-center space-x-4">
               <a href="#benefits" onClick={(e) => handleScroll(e, 'benefits')} className="text-[#495057] hover:text-[#007BFF] transition-colors">Benefits</a>
               <a href="#howitworks" onClick={(e) => handleScroll(e, 'howitworks')} className="text-[#495057] hover:text-[#007BFF] transition-colors">How It Works</a>
               <a href="#explore" onClick={(e) => handleScroll(e, 'explore')} className="text-[#495057] hover:text-[#007BFF] transition-colors">Explore</a>
@@ -88,12 +88,12 @@ const Navbar: React.FC<NavbarProps> = ({ user, onLogout }) => {
 
 
             {/* User Profile Section */}
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-4 ml-4">
               {user ? (
                 <>
                   <Button
                     onClick={() => setShareModalOpen(true)}
-                    className="px-4 py-2 rounded-full bg-[#007BFF] text-white border border-[#007BFF]
+                    className="px-2 py-2 rounded-full bg-[#007BFF] text-white border border-[#007BFF]
                              hover:bg-[#0056b3] transition-all duration-300 flex items-center space-x-2"
                   >
                     <Plus size={18} />
@@ -109,7 +109,6 @@ const Navbar: React.FC<NavbarProps> = ({ user, onLogout }) => {
                         alt={user.name} 
                         className="h-10 w-10 rounded-full ring-2 ring-[#007BFF]/10 group-hover:ring-[#007BFF]/30 transition-all"
                       />
-                      <span className="text-[#212529] font-medium">{user.name}</span>
                     </button>
 
                     {dropdownOpen && (
@@ -152,7 +151,7 @@ const Navbar: React.FC<NavbarProps> = ({ user, onLogout }) => {
                                hover:bg-[#0056b3] transition-all duration-300"
                                onClick={() => openAuthModal()}
                     >
-                      Login
+                      Join Now
                     </Button>
                 </div>
               )}

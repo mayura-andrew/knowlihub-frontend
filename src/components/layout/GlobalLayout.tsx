@@ -1,24 +1,21 @@
 import React, { useState } from 'react';
 import Navbar from '../common/NavBar';
 import User from '../../assets/user.svg';
-import AuthorInfo from '../common/AuthorInfo.component';
 import UserDashboardCards from '../common/UserDashboardCards';
-import { GithubIcon, TwitterIcon, LinkedinIcon } from 'lucide-react';
 import SidebarInfo from '../common/Footer.component';
-import { Link } from 'react-router-dom';
-
-const categories = [
-    "Web Development",
-    "Data Science",
-    "Machine Learning",
-    "Artificial Intelligence",
-    "Mobile Development",
-    "Game Development",
-    "Cybersecurity",
-    "Cloud Computing",
-    "DevOps",
-    "Blockchain",
-    "Quantum Computing"
+import CategoriesNavigation from '../common/CategoriesNavigation.component';
+const categories: Category[] = [
+  { id: 'web-dev', name: 'Web Development' },
+  { id: 'data-science', name: 'Data Science' },
+  { id: 'machine-learning', name: 'Machine Learning' },
+  { id: 'ai', name: 'Artificial Intelligence' },
+  { id: 'mobile-dev', name: 'Mobile Development' },
+  { id: 'game-dev', name: 'Game Development' },
+  { id: 'cybersecurity', name: 'Cybersecurity' },
+  { id: 'cloud-computing', name: 'Cloud Computing' },
+  { id: 'devops', name: 'DevOps' },
+  { id: 'blockchain', name: 'Blockchain' },
+  { id: 'quantum-computing', name: 'Quantum Computing' }
 ];
 
 const featuredUsers = [
@@ -35,6 +32,10 @@ interface GlobalLayoutProps {
     hideRightSidebar?: boolean;
 }
 
+interface Category {
+    id: string;
+    name: string;
+}
 // Move user data to a separate object for better organization
 const userData = {
     navUser: {
@@ -68,140 +69,78 @@ const studyTip = {
 };
 
 
+
 const GlobalLayout: React.FC<GlobalLayoutProps> = ({ 
     children, 
     hideLeftSidebar = false, 
     hideRightSidebar = false 
 }) => {
-    const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
-    const currentYear = new Date().getFullYear(); // Define currentYear
+    const [selectedCategories, setSelectedCategories] = useState<Category[]>([]);
 
-    const handleCategoryChange = (category: string) => {
-        setSelectedCategories((prev) =>
-            prev.includes(category)
-                ? prev.filter((c) => c !== category)
-                : [...prev, category]
-        );
-    };
-
-    const socialLinks = [
-        { Icon: GithubIcon, href: "https://github.com/your-repo" },
-        { Icon: TwitterIcon, href: "https://twitter.com/your-project" },
-        { Icon: LinkedinIcon, href: "https://linkedin.com/company/your-project" }
-    ];
-
-    const footerLinks = {
-        Project: [
-            { name: "GitHub Repository", href: "https://github.com/your-repo" },
-            { name: "Contributing Guide", href: "https://github.com/your-repo/contributing.md" },
-            { name: "Issues", href: "https://github.com/your-repo/issues" }
-        ],
-        Resources: [
-            { name: "Documentation", href: "https://your-docs-site.com" },
-            { name: "Roadmap", href: "https://github.com/your-repo/roadmap.md" },
-            { name: "Releases", href: "https://github.com/your-repo/releases" }
-        ],
-        Community: [
-            { name: "Join Slack/Discord", href: "#" },
-            { name: "Open Source Events", href: "#" },
-            { name: "Community Blog", href: "#" }
-        ]
+    const handleCategoryChange = (category: Category) => {
+      setSelectedCategories((prev) =>
+        prev.some((c) => c.id === category.id)
+          ? prev.filter((c) => c.id !== category.id)
+          : [...prev, category]
+      );
     };
 
     return (
         <div className="bg-white min-h-screen flex flex-col font-['Roboto']">
+            {/* <Navbar user={userData.navUser} /> */}
             <Navbar />
 
-            <div className="flex flex-1 mt-20">
+
+            <div className="flex flex-1 mt-20 overflow-hidden">
                 {/* Left Sidebar */}
                 {!hideLeftSidebar && (
                   <aside className="w-64 bg-[#F8F9FA] border-r border-[#DEE2E6] overflow-y-auto max-h-auto custom-scrollbar p-4 shadow-sm">
-                    <h3 className="text-xl font-semibold mb-4 text-[#212529] flex items-center">
-                      <span className="mr-2">🗂️</span> Categories
-                    </h3>
-                    <ul className="space-y-2">
-                      <li className="text-base text-[#495057] border hover:bg-[#007BFF]/10 p-3 rounded-lg cursor-pointer flex items-center transition-colors duration-200">
-                        <span className="mr-2">⭐</span> Top Recommendations
-                      </li>
-                      <li className="text-base text-[#495057] border hover:bg-[#007BFF]/10 p-3 rounded-lg cursor-pointer flex items-center transition-colors duration-200">
-                        <span className="mr-2">🆕</span> Latest
-                      </li>
-                      {categories.map((category, index) => (
-                        <li
-                          key={index}
-                          className="text-base text-[#495057] hover:bg-[#007BFF]/10 p-1 rounded-lg cursor-pointer flex items-center transition-colors duration-200"
-                        >
-                          <label className="flex items-center w-full cursor-pointer">
-                            <input
-                              type="checkbox"
-                              className="mr-2"
-                              checked={selectedCategories.includes(category)}
-                              onChange={() => handleCategoryChange(category)}
-                            />
-                            <span className="mr-2">📚</span>
-                            {category}
-                          </label>
-                        </li>
-                      ))}
-                    </ul>
+                    <CategoriesNavigation
+                      categories={categories}
+                      selectedCategories={selectedCategories}
+                      onCategoryChange={handleCategoryChange} 
+                     
+                    />
                 
                     <div className="border-t border-[#DEE2E6] my-6" />
                 
-                    <SidebarInfo 
-                      socialLinks={socialLinks}
-                      footerLinks={footerLinks} 
-                      currentYear={currentYear}
-                    />
                   </aside>
                 )}
 
                 {/* Main Content */}
                 <main className={`flex-1 flex flex-col bg-white ${hideLeftSidebar && !hideRightSidebar ? 'ml-0' : ''} ${!hideLeftSidebar && hideRightSidebar ? 'mr-0' : ''}`}>
-                    <div className="flex-1 p-4">
-                        {children}
-                    </div>
+                <div 
+                        className="flex-1 p-4 overflow-y-auto custom-scrollbar"
+                        style={{
+                            maxHeight: 'calc(100vh - 5rem)', // Subtract navbar height
+                            scrollbarWidth: 'thin', // For Firefox
+                            scrollbarColor: '#007BFF #F8F9FA' // Thumb and track color
+                        }}
+                    >
+                    {children}
+                  </div>
                 </main>
 
                 {/* Right Sidebar */}
                 {!hideRightSidebar && (
-                    <aside className="w-64 bg-[#F8F9FA] border-l border-[#DEE2E6] max-h-auto custom-scrollbar p-1">
+                    <aside className="w-64 bg-[#F8F9FA] border-l border-[#DEE2E6] overflow-y-auto max-h-[100vh-5rem] custom-scrollbar p-1">
                         {/* User Dashboard Cards */}
                         <UserDashboardCards
+                            isLoggedIn={false}
                             navUser={userData.navUser}
                             levelInfo={userData.levelInfo}
                             nextLevelInfo={userData.nextLevelInfo}
                             activity={userData.activity}
-                            studyTip={studyTip} />
-
-                        <div className="border-t border-[#DEE2E6] my-6" />
-
-                        {/* Top Contributors Section */}
-                        <div className="mb-6">
-                            <h3 className="text-md font-semibold text-[#212529] flex items-center justify-center mb-4">
-                                <span className="mr-2">👤</span> Top Contributors
-                            </h3>
-                            <ul className="space-y-2 max-h-72">
-                                {featuredUsers.map((user, index) => (
-                                    <AuthorInfo
-                                        key={index}
-                                        avatar={user.avatar}
-                                        name={user.name}
-                                        level={user.level}
-                                        position={user.expertise}
-                                        profileLink={`/profile/${user.name}`}
-                                        size="small"
-                                        showFollowButton={false} />
-                                ))}
-                            </ul>
-                        </div>
-                        <div className="mt-4 text-center">
-                        <Link to="/more-info" className="text-sm text-[#007BFF] hover:underline">
-                        See More Contributors
-                        </Link>
-                    </div>
-                    </aside>
+                            studyTip={studyTip}
+                            featuredUsers={featuredUsers} />
+                        </aside>
                 )}
             </div>
+
+            {/* Footer */}
+
+            <SidebarInfo 
+            />
         </div>
     );
 };
