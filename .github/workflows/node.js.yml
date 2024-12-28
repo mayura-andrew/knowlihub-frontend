@@ -64,35 +64,20 @@ jobs:
           ls -la dist/
           touch dist/.nojekyll
 
-      - name: Debug dist directory
-        if: always()
-        run: |
-          pwd
-          ls -la
-          ls -la dist || true
-
       - name: Upload artifact
-        if: always()
         uses: actions/upload-pages-artifact@v3
         with:
           path: dist
-          retention-days: 1
 
   deploy:
     needs: build
     runs-on: ubuntu-latest
-
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
-      - name: Download artifact
-        uses: actions/download-artifact@v3
-        with:
-          name: github-pages
-          path: ./dist
-
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
+        
