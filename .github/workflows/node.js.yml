@@ -6,6 +6,11 @@ on:
   pull_request:
     branches: [ "main" ]
 
+# Prevent concurrent deployments
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
 permissions:
   contents: read
   pages: write
@@ -17,7 +22,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [18.x]  # Simplified to single version to avoid artifact conflicts
+        node-version: [18.x]
 
     steps:
     - uses: actions/checkout@v4
@@ -55,7 +60,6 @@ jobs:
       uses: actions/upload-pages-artifact@v3
       with:
         path: ./dist
-        name: github-pages-${{ github.run_id }}
 
   deploy:
     environment:
