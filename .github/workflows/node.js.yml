@@ -40,12 +40,11 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-pnpm-store-
 
-    # Changed from --frozen-lockfile to allow installation without lock file
     - name: Install dependencies
       run: pnpm install
 
     - name: Build
-      run: pnpm run build --if-present
+      run: pnpm run build
       
     - name: Test
       run: pnpm test
