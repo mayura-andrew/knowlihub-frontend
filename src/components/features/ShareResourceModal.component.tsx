@@ -85,7 +85,7 @@ const ShareResourceModal: React.FC<ShareResourceModalProps> = ({ open, onOpenCha
     setFetchError('');
   
     try {
-      const response = await fetch(`http://139.59.31.35:3001/api/fetchMetaData?url=${encodeURIComponent(url)}`, {
+      const response = await fetch(`http://localhost:3001/api/fetchMetaData?url=${encodeURIComponent(url)}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
