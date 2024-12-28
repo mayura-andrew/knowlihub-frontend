@@ -51,19 +51,32 @@ jobs:
           ${{ runner.os }}-pnpm-store-
 
     - name: Install dependencies
-      run: pnpm install
+      run: |
+        pnpm install
+        pnpm list
 
     - name: Build
       env:
         BASE_URL: '/${{ github.event.repository.name }}/'
       run: |
-        pnpm run build
+        set -x # Enable debug output
+        pnpm run build || exit 1
+        ls -la dist/
         touch dist/.nojekyll
 
+    - name: Debug dist directory
+      if: always()
+      run: |
+        pwd
+        ls -la
+        ls -la dist || true
+
     - name: Upload artifact
+      if: always()
       uses: actions/upload-pages-artifact@v3
       with:
-        path: ./dist
+        path: dist
+        retention-days: 1
 
   deploy:
     needs: build
