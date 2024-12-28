@@ -2,9 +2,9 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 # Prevent concurrent deployments
 concurrency:
@@ -21,71 +21,71 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
-    
-    - name: Setup Pages
-      uses: actions/configure-pages@v4
-    
-    - name: Use Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '18.x'
-    
-    - name: Install pnpm
-      uses: pnpm/action-setup@v2
-      with:
-        version: 8
-        run_install: false
+      - uses: actions/checkout@v4
 
-    - name: Get pnpm store directory
-      shell: bash
-      run: |
-        echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
 
-    - name: Setup pnpm cache
-      uses: actions/cache@v3
-      with:
-        path: ${{ env.STORE_PATH }}
-        key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-        restore-keys: |
-          ${{ runner.os }}-pnpm-store-
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18.x"
 
-    - name: Install dependencies
-      run: |
-        pnpm install
-        pnpm list
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+          run_install: false
 
-    - name: Build
-      env:
-        BASE_URL: '/${{ github.event.repository.name }}/'
-      run: |
-        set -x # Enable debug output
-        pnpm run build || exit 1
-        ls -la dist/
-        touch dist/.nojekyll
+      - name: Get pnpm store directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
 
-    - name: Debug dist directory
-      if: always()
-      run: |
-        pwd
-        ls -la
-        ls -la dist || true
+      - name: Setup pnpm cache
+        uses: actions/cache@v3
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
 
-    - name: Upload artifact
-      if: always()
-      uses: actions/upload-pages-artifact@v3
-      with:
-        path: dist
-        retention-days: 1
+      - name: Install dependencies
+        run: |
+          pnpm install
+          pnpm list
+
+      - name: Build
+        env:
+          BASE_URL: "/${{ github.event.repository.name }}/"
+        run: |
+          set -x # Enable debug output
+          pnpm run build || exit 1
+          ls -la dist/
+          touch dist/.nojekyll
+
+      - name: Debug dist directory
+        if: always()
+        run: |
+          pwd
+          ls -la
+          ls -la dist || true
+
+      - name: Upload artifact
+        if: always()
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+          retention-days: 1
 
   deploy:
     needs: build
     runs-on: ubuntu-latest
-    
+
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-      
+
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
